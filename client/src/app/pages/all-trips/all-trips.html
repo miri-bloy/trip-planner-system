@@ -1,1 +1,17 @@
-<p>all-trips works!</p>
+<div class="trips-container">
+@if (authService.currentUser()?.isAdmin) {
+
+  <button  [routerLink]="['/add-trip']">
+    הוספת טיול
+  </button>
+
+}
+  @for (trip of trips(); track trip.id) {
+
+    <app-trip-card
+      [currentTrip]="trip">
+    </app-trip-card>
+
+  }
+
+</div>

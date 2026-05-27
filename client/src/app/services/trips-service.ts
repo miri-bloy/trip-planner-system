@@ -4,8 +4,12 @@ import { inject, Injectable, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class Trips {
+export class TripsService {
   private http= inject(HttpClient);
+  getTrips() {
+  return this.http.get<any[]>('/api/trips');
+}
+ 
 
  
 }

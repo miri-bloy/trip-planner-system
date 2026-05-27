@@ -1,1 +1,39 @@
-<p>trip-card works!</p>
+<div class="trip-card">
+
+  <img
+    [src]="currentTrip().image"
+    [alt]="currentTrip().name"
+    class="trip-image"
+  />
+
+  <div class="trip-content">
+    <h2>{{ currentTrip().name }}</h2>
+    <p>{{ currentTrip().destination }}</p>
+  </div>
+  @if (authService.currentUser()?.isAdmin) {
+
+    <div class="actions">
+
+      <button (click)="onEdit()">עריכה</button>
+
+      <button (click)="onDelete()">מחיקה</button>
+
+    </div>
+
+  }
+  @if (showDeleteModal) {
+  <div class="modal-backdrop">
+
+    <div class="modal">
+
+      <p>האם אתה בטוח שברצונך למחוק?</p>
+
+      <button (click)="confirmDelete()">אישור</button>
+      <button (click)="cancelDelete()">ביטול</button>
+
+    </div>
+
+  </div>
+}
+
+</div>

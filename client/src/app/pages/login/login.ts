@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './login.css',
 })
 export class Login {
+    //אחרי ההתחברות  צריך לשמור
+  // this.currentUser.set(user);
 
 }
