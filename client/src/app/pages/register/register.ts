@@ -1,11 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../modules/user.module';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
 export class Register {
+
+  private authService = inject(AuthService);
+
+  loading = signal<boolean>(false);
+  users = signal<User[]>([]);
+  error = signal<string | null>(null);
+
+  userModel: User = {
+    name: '',
+    email: '',
+    password: '',
+    isAdmin: false
+  };
+
+  verifyPassword=null;
+
+  onSubmit() {
+
+    //בדיקת תקינות טפסים
+    // ------חסר------
+    
+    this.loading.set(true);
+    this.error.set(null);
+
+    //בדיקה וטיפול במקרה של הרשמה למשתמש קיים
+    this.authService.checkUserExists(this.userModel.name).subscribe({
+      next: (existingUsers) => {
+        if (existingUsers.length > 0) {
+          this.error.set('שם משתמש זה כבר מוכר במערכת, בחר שם אחר או עבור לדף כניסה');
+          this.loading.set(false);
+          return;
+        }
+
+        //הרשמת המשתמש החדש במערכת
+        this.authService.register(this.userModel).subscribe({
+          next: (response) => {
+            console.log('נרשם בהצלחה!', response);
+            this.loading.set(false);
+            this.userModel = { name: '', email: '', password: '', isAdmin: false };
+          },
+          error: (err) => {
+            console.error(err);
+            this.error.set('ההרשמה נכשלה.');
+            this.loading.set(false);
+          }
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this.error.set('שגיאה בתקשורת מול השרת.');
+        this.loading.set(false);
+      }
+    });
+  }
 
 }

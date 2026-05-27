@@ -1,1 +1,35 @@
-<p>register works!</p>
+<div class="register-container">
+    <h2>הרשמה לאתר</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      
+      <div>
+        <label>שם מלא:</label>
+        <input type="text" [(ngModel)]="userModel.name" name="userName" required>
+      </div>
+  
+      <div>
+        <label>אימייל:</label>
+        <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
+      </div>
+  
+      <div>
+        <label>סיסמה:</label>
+        <input type="password" [(ngModel)]="userModel.password" name="userPassword" required>
+      </div>
+
+      <div>
+        <label>אימות סיסמה:</label>
+        <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" required>
+      </div>
+  
+      @if (error()) {
+        <p style="color: red;">{{ error() }}</p>
+      }
+  
+      <button type="submit" [disabled]="loading()">
+        @if (loading()) { טוען... } @else { הירשם }
+      </button>
+  
+    </form>
+  </div>

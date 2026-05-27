@@ -23,6 +23,11 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
+  // בדיקה תקינות- האם המשתמש כבר קיים
+  checkUserExists(name: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}?name=${name}`);
+  }
+
   // הרשמה למערכת
   register(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user).pipe(
@@ -31,6 +36,7 @@ export class AuthService {
       })
     );
   }
+
 
   // התחברות למערכת
   login(email: string, password: string): Observable<User[]> {
