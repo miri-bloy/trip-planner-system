@@ -6,17 +6,24 @@ http://localhost:3000/trips/:id
 
 הוספת טיול – POST /trips ●
 http://localhost:3000/trips
+
 עדכון טיול – PUT /trips/:id ●
 http://localhost:3000/trips/:id
+
 מחיקת טיול – DELETE /trips/:id ●
 http://localhost:3000/trips/:id
+
 רשימת הזמנות – GET /bookings ●
 http://localhost:3000/bookings
+
 יצירת הזמנה – POST /bookings ●
 http://localhost:3000/bookings
+
 רשימת משתמשים – GET /users ●
 http://localhost:3000/users
+
 פרטי משתמש – GET /users/:id ●
 http://localhost:3000/users/:id
-הוספת משתמש – POST /users
+
+הוספת משתמש – POST /users ●
 http://localhost:3000/users
