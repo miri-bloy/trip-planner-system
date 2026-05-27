@@ -1,7 +1,8 @@
 import { Component, inject, input } from '@angular/core';
-import { TripsService } from '../../services/trips-service';
-import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
+import { TripsService } from '../../services/trips.service';
+import { AuthService } from '../../services/auth.service';
+import { Trip } from '../../modules/trip.moduel';
 
 @Component({
   selector: 'app-trip-card',
@@ -13,7 +14,7 @@ export class TripCard {
   tripService = inject(TripsService);
   authService = inject(AuthService);
   router = inject(Router);
-  currentTrip = input.required<any>();//זמני עד שיהיה מודול מסודר
+  currentTrip = input.required<Trip>();
   showDeleteModal = false;
   tripToDelete: any = null;
   onEdit() {
