@@ -34,6 +34,13 @@
       "password": "123456",
       "isAdmin": false,
       "id": "XtXCrCuqAHs"
+    },
+    {
+      "name": "miri",
+      "email": "mm0504175155@gmail.com",
+      "password": "123456",
+      "isAdmin": false,
+      "id": "alt1MLJAQcM"
     }
   ],
   "trips": [

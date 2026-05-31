@@ -4,8 +4,8 @@
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     
     <div>
-      <label>שם משתמש:</label>
-      <input type="text" [(ngModel)]="userModel.name" name="userName" required>
+      <label>כתובת מייל:</label>
+      <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
     </div>
     <div>
       <label>סיסמה:</label>

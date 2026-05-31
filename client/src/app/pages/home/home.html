@@ -1,1 +1,12 @@
-<p>home works!</p>
+<header>
+    <section>
+        <p>שלום ל: {{this.authService.currentUser()?.name}}</p>
+        <button (click)="onLogout()">יציאה</button>
+    </section>
+    <section>
+        <button routerLink="/AllTrips">רשימת הטיולים</button>
+    </section>
+    <section>
+        <button routerLink="/MyTrips">הטיולים שלי</button>
+    </section>
+</header>

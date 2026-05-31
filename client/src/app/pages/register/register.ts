@@ -41,10 +41,10 @@ export class Register {
     this.error.set(null);
 
     //בדיקה וטיפול במקרה של הרשמה למשתמש קיים
-    this.authService.checkUserExists(this.userModel.name).subscribe({
+    this.authService.checkUserExists(this.userModel.email).subscribe({
       next: (existingUsers) => {
         if (existingUsers.length > 0) {
-          this.error.set('שם משתמש זה כבר מוכר במערכת, בחר שם אחר או עבור לדף כניסה');
+          this.error.set('מייל זה כבר מוכר במערכת, בחר שם אחר או עבור לדף כניסה');
           this.loading.set(false);
           return;
         }
