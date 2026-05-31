@@ -27,6 +27,13 @@
       "email": "david@example.com",
       "password": "davidpass",
       "isAdmin": false
+    },
+    {
+      "name": "מירי בלוי",
+      "email": "m0504175155@gmail.com",
+      "password": "123456",
+      "isAdmin": false,
+      "id": "XtXCrCuqAHs"
     }
   ],
   "trips": [
@@ -174,5 +181,6 @@
       "userId": 1,
       "people": 3
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

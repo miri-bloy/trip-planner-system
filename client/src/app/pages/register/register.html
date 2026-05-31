@@ -1,35 +1,38 @@
 <div class="register-container">
-    <h2>הרשמה לאתר</h2>
-  
-    <form (ngSubmit)="onSubmit()">
-      
-      <div>
-        <label>שם מלא:</label>
-        <input type="text" [(ngModel)]="userModel.name" name="userName" required>
-      </div>
-  
-      <div>
-        <label>אימייל:</label>
-        <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
-      </div>
-  
-      <div>
-        <label>סיסמה:</label>
-        <input type="password" [(ngModel)]="userModel.password" name="userPassword" required>
-      </div>
+  <h2>הרשמה לאתר</h2>
 
-      <div>
-        <label>אימות סיסמה:</label>
-        <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" required>
-      </div>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    
+    <div>
+      <label>שם מלא:</label>
+      <input type="text" [(ngModel)]="userModel.name" name="userName" required>
+    </div>
+
+    <div>
+      <label>אימייל:</label>
+      <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
+    </div>
+
+    <div>
+      <label>סיסמה:</label>
+      <input type="password" [(ngModel)]="userModel.password" name="userPassword" required minlength="6">
+    </div>
+
+    <div>
+      <label>אימות סיסמה:</label>
+      <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" required>
+    </div>
+
+    @if (error()) {
+      <p style="color: red; font-weight: bold; padding: 5px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px;">
+        {{ error() }}
+      </p>
+    }
+
+    <button type="submit" [disabled]="loading() || registerForm.invalid">
+      @if (loading()) { טוען... } @else { הירשם }
+    </button>
+  </form>
   
-      @if (error()) {
-        <p style="color: red;">{{ error() }}</p>
-      }
-  
-      <button type="submit" [disabled]="loading()">
-        @if (loading()) { טוען... } @else { הירשם }
-      </button>
-  
-    </form>
-  </div>
+  <p>נרשמת כבר למערכת? עבור ל <a routerLink="/login">דף התחברות</a></p>
+</div>

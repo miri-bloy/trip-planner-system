@@ -37,7 +37,6 @@ export class AuthService {
     );
   }
 
-
   // התחברות למערכת
   login(email: string, password: string): Observable<User[]> {
     const loginUrl = `${this.apiUrl}?email=${email}&password=${password}`;
