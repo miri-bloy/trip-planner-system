@@ -41,6 +41,13 @@
       "password": "123456",
       "isAdmin": false,
       "id": "alt1MLJAQcM"
+    },
+    {
+      "name": "tamar",
+      "email": "td0533113883@gmail.com",
+      "password": "1234567",
+      "isAdmin": false,
+      "id": "8Q9OTtuW8sg"
     }
   ],
   "trips": [
@@ -146,48 +153,56 @@
     }
   ],
   "bookings": [
-    {
-      "id": "1",
-      "tripId": 1,
-      "userId": 1,
-      "people": 2
-    },
-    {
-      "id": "2",
-      "tripId": 2,
-      "userId": 3,
-      "people": 1
-    },
-    {
-      "id": "3",
-      "tripId": 3,
-      "userId": 1,
-      "people": 3
-    },
-    {
-      "id": "4",
-      "tripId": 5,
-      "userId": 4,
-      "people": 2
-    },
-    {
-      "id": "5",
-      "tripId": 8,
-      "userId": 3,
-      "people": 1
-    },
-    {
-      "id": "6",
-      "tripId": 10,
-      "userId": 1,
-      "people": 2
-    },
-    {
-      "id": "7",
-      "tripId": 1,
-      "userId": 1,
-      "people": 3
-    }
+   
+  {
+    "id": "1",
+    "tripId": "1",
+    "userId": "1",
+    "people": 2
+  },
+  {
+    "id": "2",
+    "tripId": "2",
+    "userId": "3",
+    "people": 1
+  },
+  {
+    "id": "3",
+    "tripId": "3",
+    "userId": "1",
+    "people": 3
+  },
+  {
+    "id": "4",
+    "tripId": "5",
+    "userId": "4",
+    "people": 2
+  },
+  {
+    "id": "5",
+    "tripId": "8",
+    "userId": "3",
+    "people": 1
+  },
+  {
+    "id": "6",
+    "tripId": "10",
+    "userId": "1",
+    "people": 2
+  },
+  {
+    "id": "7",
+    "tripId": "1",
+    "userId": "1",
+    "people": 3
+  },
+  {
+    "id": "7",
+    "tripId": "1",
+    "userId": "2",
+    "people": 3
+  }
+
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }

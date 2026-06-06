@@ -1,1 +1,12 @@
-<p>my-trips works!</p>
+
+<div class="trips-container">
+
+  @for (trip of myTrips(); track trip.id) {
+
+    <app-trip-card
+      [currentTrip]="trip">
+    </app-trip-card>
+
+  }
+
+</div>

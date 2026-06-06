@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './trip-details.css',
 })
 export class TripDetails {
+  
 
 }

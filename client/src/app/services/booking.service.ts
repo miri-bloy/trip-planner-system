@@ -6,13 +6,19 @@ import { Booking } from '../modules/booking.module';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class BookingService {
     private http = inject(HttpClient);
     private apiUrl = 'http://localhost:3000/bookings';
 
     // קבלת רשימת כל ההזמנות במערכת
-  getBookings(): Observable<Booking[]> {
+  getBookings(): Observable<Booking[]> {    
     return this.http.get<Booking[]>(this.apiUrl);
+        console.log(this.apiUrl);
+
+  }
+  
+  getBookingsByUserId(userId: string | undefined): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   // יצירת הזמנה חדשה לטיול
