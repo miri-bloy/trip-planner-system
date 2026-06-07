@@ -18,7 +18,7 @@ export class TripCard {
   showDeleteModal = false;
   tripToDelete: any = null;
   onEdit() {
-    this.router.navigate(['/trip-form-modal']);
+    this.router.navigate(['/edit-trip',this.currentTrip().id]);
   }
   onDelete() {
     this.tripToDelete = this.currentTrip();

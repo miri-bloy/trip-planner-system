@@ -22,6 +22,7 @@ export const routes: Routes = [
             { path: 'my-trips', component: MyTrips },
             { path: 'my-trips/:id', component: TripDetails },
             { path: 'add-trip', component: TripFormModal},
+            { path: 'edit-trip/:id', component: TripFormModal },
         ]
     },
 ];

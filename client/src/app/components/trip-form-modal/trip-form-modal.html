@@ -1,2 +1,36 @@
 
-<h1>טופס הוספת טיול</h1>
+<div class="form-container">
+  
+  <h2>{{ isEditMode ? 'עריכת טיול קיים' : 'הוספת טיול חדש' }}</h2>
+
+  <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="name">שם הטיול:</label>
+      <input id="name" type="text" formControlName="name" />
+      
+      @if (tripForm.get('name')?.invalid && tripForm.get('name')?.touched) {
+        <small class="error-message">שם הטיול הוא שדה חובה</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="destination">יעד הטיול:</label>
+      <input id="destination" type="text" formControlName="destination" />
+      
+      @if (tripForm.get('destination')?.invalid && tripForm.get('destination')?.touched) {
+        <small class="error-message">יעד הטיול הוא שדה חובה</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="image">קישור לתמונה:</label>
+      <input id="image" type="text" formControlName="image" />
+    </div>
+
+    <button type="submit" [disabled]="tripForm.invalid" class="submit-btn">
+      {{ isEditMode ? 'שמור שינויים' : 'צור טיול חדש' }}
+    </button>
+    
+  </form>
+</div>
