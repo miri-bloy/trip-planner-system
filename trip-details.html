@@ -1,0 +1,25 @@
+@if (currentTrip()) {
+      <h1>{{ currentTrip()?.name }}</h1>
+      <h2>Destination: {{ currentTrip()?.destination }}</h2>
+      <h3>Description: {{ currentTrip()?.description }}</h3>
+      <h3>Dates: Between {{ currentTrip()?.startDate }} and {{ currentTrip()?.endDate }}</h3>
+      <h3>Price: {{ currentTrip()?.price }} ש"ח</h3>
+      
+      <img [src]="currentTrip()?.image" alt="trip-image" style="max-width: 400px; border-radius: 8px;">
+    
+      <br><br>
+    
+      @if (authService.currentUser()) {
+        @if (isRegistered()) {
+          <button (click)="registerToTrip()" style="background-color: #ff4d4d; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+            בטל רישום לטיול
+          </button>
+        } @else {
+          <button (click)="cancelTripRegistration()" style="background-color: #4caf50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
+            הירשם לטיול זה
+          </button>
+        }
+      }
+    } @else {
+      <p>טוען את פרטי הטיול...</p>
+    }
