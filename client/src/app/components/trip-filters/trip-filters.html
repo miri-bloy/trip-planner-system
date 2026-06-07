@@ -1,1 +1,27 @@
-<p>trip-filters works!</p>
+<div class="filters-container">
+  <div class="filter-group">
+    <label>חפש יעד:</label>
+    <input type="text" placeholder="לאן תרצה לטוס?" (input)="onDestinationInput($event)" />
+  </div>
+
+  <div class="filter-group">
+    <label>מתאריך:</label>
+    <input type="date" (change)="onDateChange($event)" />
+  </div>
+
+  <div class="filter-group">
+    <label>מחיר מקסימלי:</label>
+    <input type="number" placeholder="לדוגמה: 1000" (input)="onMaxPriceInput($event)" />
+  </div>
+
+  <div class="filter-group">
+    <label>מיין לפי:</label>
+    <select (change)="onSortChange($event)">
+      <option value="default">ללא מיון</option>
+      <option value="priceAsc">מחיר: מהזול ליקר ↑</option>
+      <option value="priceDesc">מחיר: מהיקר לזול ↓</option>
+      <option value="dateAsc">תאריך: מהקרוב לרחוק 📅</option>
+      <option value="dateDesc">תאריך: מהרחוק לקרוב ⏳</option>
+    </select>
+  </div>
+</div>

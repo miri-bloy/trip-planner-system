@@ -1,17 +1,20 @@
 <div class="trips-container">
-@if (authService.currentUser()?.isAdmin) {
 
-  <button  [routerLink]="['/add-trip']">
-    הוספת טיול
-  </button>
+  <app-trip-filters 
+    (destinationChange)="selectedDestination.set($event)"
+    (dateChange)="selectedDate.set($event)"
+    (maxPriceChange)="maxPrice.set($event)"
+    (sortChange)="priceSortOrder.set($event)">
+  </app-trip-filters>
 
-}
-  @for (trip of trips(); track trip.id) {
+  @if (authService.currentUser()?.isAdmin) {
+    <button [routerLink]="['/add-trip']">
+      הוספת טיול
+    </button>
+  }
 
-    <app-trip-card
-      [currentTrip]="trip">
-    </app-trip-card>
-
+  @for (trip of filteredTrips(); track trip.id) {
+    <app-trip-card [currentTrip]="trip"></app-trip-card>
   }
 
 </div>

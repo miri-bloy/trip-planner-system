@@ -1,7 +1,13 @@
-
 <div class="trips-container">
 
-  @for (trip of myTrips(); track trip.id) {
+  <app-trip-filters 
+    (destinationChange)="selectedDestination.set($event)"
+    (dateChange)="selectedDate.set($event)"
+    (maxPriceChange)="maxPrice.set($event)"
+    (sortChange)="priceSortOrder.set($event)">
+  </app-trip-filters>
+
+  @for (trip of filteredMyTrips(); track trip.id) {
 
     <app-trip-card
       [currentTrip]="trip">
