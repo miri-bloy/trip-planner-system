@@ -12,12 +12,10 @@ import { RouterLink, Router } from "@angular/router";
   styleUrl: './register.css',
 })
 export class Register {
-
   private authService = inject(AuthService);
   private router = inject(Router);
 
   loading = signal<boolean>(false);
-  users = signal<User[]>([]);
   error = signal<string | null>(null);
 
   userModel: User = {
@@ -30,8 +28,7 @@ export class Register {
   verifyPassword = "";
 
   onSubmit() {
-
-    //בדיקת תקינות הטופס-אימות סיסמה
+    // 1. בדיקת התאמת סיסמאות מקומית
     if (this.userModel.password !== this.verifyPassword) {
       this.error.set('הסיסמאות שכתבת אינן תואמות זו לזו.');
       return;
@@ -40,35 +37,34 @@ export class Register {
     this.loading.set(true);
     this.error.set(null);
 
-    //בדיקה וטיפול במקרה של הרשמה למשתמש קיים
+    // 2. בדיקה מול השרת האם המייל תפוס
     this.authService.checkUserExists(this.userModel.email).subscribe({
       next: (existingUsers) => {
         if (existingUsers.length > 0) {
-          this.error.set('מייל זה כבר מוכר במערכת, בחר שם אחר או עבור לדף כניסה');
+          this.error.set('כתובת אימייל זו כבר רשומה במערכת. נסה להתחבר או השתמש במייל אחר.');
           this.loading.set(false);
           return;
         }
 
-        //הרשמת המשתמש החדש במערכת
+        // 3. הרשמה בפועל אם המייל פנוי
         this.authService.register(this.userModel).subscribe({
           next: (response) => {
             console.log('נרשם בהצלחה!', response);
             this.loading.set(false);
             this.userModel = { name: '', email: '', password: '', isAdmin: false };
             this.verifyPassword = "";
-            // ניווט לדף הבית לאחר הרשמה מוצלחת
             this.router.navigate(['/home']);
           },
           error: (err) => {
             console.error(err);
-            this.error.set('ההרשמה נכשלה.');
+            this.error.set('תהליך ההרשמה נכשל בשרת. נסה שנית מאוחר יותר.');
             this.loading.set(false);
           }
         });
       },
       error: (err) => {
         console.error(err);
-        this.error.set('שגיאה בתקשורת מול השרת.');
+        this.error.set('שגיאה בתקשורת מול השרת. אנא בדוק את החיבור לרשת.');
         this.loading.set(false);
       }
     });

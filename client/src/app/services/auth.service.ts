@@ -23,7 +23,7 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
-  // בדיקה תקינות- האם המשתמש כבר קיים
+  // בדיקת תקינות - האם המשתמש כבר קיים (משמש בעיקר לרגיסטר)
   checkUserExists(email: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}?email=${email}`);
   }
@@ -37,18 +37,9 @@ export class AuthService {
     );
   }
 
-  // התחברות למערכת
-  login(email: string, password: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}?email=${email}`).pipe(
-      tap(users => {
-        console.log('המידע שחזר מהשרת עבור המייל:', users);
-        if (users && users.length > 0 && users[0].password === password) {
-          this.currentUser.set(users[0]);
-        } else {
-          users.length = 0;
-        }
-      })
-    );
+  // התחברות למערכת - מחזיר את המשתמש המלא אם הכל תקין
+  login(email: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}?email=${email}`);
   }
 
   // התנתקות מהמערכת

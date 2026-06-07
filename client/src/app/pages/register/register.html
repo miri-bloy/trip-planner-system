@@ -1,35 +1,57 @@
 <div class="register-container">
   <h2>הרשמה לאתר</h2>
 
-  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+  <form (ngSubmit)="registerForm.form.valid && onSubmit()" #registerForm="ngForm" novalidate>
     
     <div>
       <label>שם מלא:</label>
-      <input type="text" [(ngModel)]="userModel.name" name="userName" required>
+      <input type="text" [(ngModel)]="userModel.name" name="userName" #nameInput="ngModel" required>
+      @if (nameInput.invalid && nameInput.touched) {
+        <small style="color: red; display: block;">שם מלא הוא שדה חובה.</small>
+      }
     </div>
 
     <div>
       <label>אימייל:</label>
-      <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
+      <input type="email" [(ngModel)]="userModel.email" name="userEmail" #emailInput="ngModel" required email>
+      @if (emailInput.invalid && emailInput.touched) {
+        @if (emailInput.errors?.['required']) {
+          <small style="color: red; display: block;">כתובת אימייל היא שדה חובה.</small>
+        }
+        @if (emailInput.errors?.['email']) {
+          <small style="color: red; display: block;">נא להזין כתובת אימייל תקינה (כולל @ ונקודה).</small>
+        }
+      }
     </div>
 
     <div>
       <label>סיסמה:</label>
-      <input type="password" [(ngModel)]="userModel.password" name="userPassword" required minlength="6">
+      <input type="password" [(ngModel)]="userModel.password" name="userPassword" #passInput="ngModel" required minlength="6">
+      @if (passInput.invalid && passInput.touched) {
+        @if (passInput.errors?.['required']) {
+          <small style="color: red; display: block;">סיסמה היא שדה חובה.</small>
+        }
+        @if (passInput.errors?.['minlength']) {
+          <small style="color: red; display: block;">הסיסמה חייבת להכיל לפחות 6 תווים.</small>
+        }
+      }
     </div>
 
     <div>
       <label>אימות סיסמה:</label>
-      <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" required>
+      <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" #verifyInput="ngModel" required>
+      @if (verifyInput.touched && userModel.password !== verifyPassword) {
+        <small style="color: red; display: block;">אימות הסיסמה אינו תואם לסיסמה שהוזנה.</small>
+      }
     </div>
 
     @if (error()) {
-      <p style="color: red; font-weight: bold; padding: 5px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px;">
+      <p style="color: red; font-weight: bold; padding: 10px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px; margin-top: 15px;">
         {{ error() }}
       </p>
     }
 
-    <button type="submit" [disabled]="loading() || registerForm.invalid">
+    <button type="submit" [disabled]="loading() || registerForm.invalid || userModel.password !== verifyPassword">
       @if (loading()) { טוען... } @else { הירשם }
     </button>
   </form>

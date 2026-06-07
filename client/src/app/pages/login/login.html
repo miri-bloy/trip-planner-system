@@ -1,19 +1,31 @@
 <div class="register-container">
   <h2>התחברות לאתר</h2>
 
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <form (ngSubmit)="loginForm.form.valid && onSubmit()" #loginForm="ngForm" novalidate>
     
     <div>
       <label>כתובת מייל:</label>
-      <input type="email" [(ngModel)]="userModel.email" name="userEmail" required>
+      <input type="email" [(ngModel)]="userModel.email" name="userEmail" #emailLogin="ngModel" required email>
+      @if (emailLogin.invalid && emailLogin.touched) {
+        @if (emailLogin.errors?.['required']) {
+          <small style="color: red; display: block;">נא להזין כתובת מייל.</small>
+        }
+        @if (emailLogin.errors?.['email']) {
+          <small style="color: red; display: block;">פורמט המייל אינו תקין.</small>
+        }
+      }
     </div>
+    
     <div>
       <label>סיסמה:</label>
-      <input type="password" [(ngModel)]="userModel.password" name="userPassword" required>
+      <input type="password" [(ngModel)]="userModel.password" name="userPassword" #passLogin="ngModel" required>
+      @if (passLogin.invalid && passLogin.touched) {
+        <small style="color: red; display: block;">נא להזין סיסמה.</small>
+      }
     </div>
 
     @if (error()) {
-      <p style="color: red; font-weight: bold; padding: 5px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px;">
+      <p style="color: red; font-weight: bold; padding: 10px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px; margin-top: 15px;">
         {{ error() }}
       </p>
     }

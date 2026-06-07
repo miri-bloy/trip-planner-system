@@ -16,9 +16,14 @@ export class BookingService {
         console.log(this.apiUrl);
 
   }
-  
+  //קבלת כל ההזמנות ע"פ מזהה משתמש
   getBookingsByUserId(userId: string | undefined): Observable<Booking[]> {
     return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}`);
+  }
+
+  //קבלת כל ההזמנות ע"פ מזהה טיול
+  getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string): Observable<Booking[]>{
+    return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}?TripId=${tripId}`);
   }
 
   // יצירת הזמנה חדשה לטיול
