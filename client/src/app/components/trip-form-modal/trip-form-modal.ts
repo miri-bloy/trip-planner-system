@@ -14,7 +14,6 @@ import { Trip } from '../../modules/trip.moduel';
 export class TripFormModal implements OnChanges {
   
   id = input<string | undefined>(); 
-
   private tripsService = inject(TripsService);
   private router = inject(Router);
 
@@ -37,6 +36,7 @@ export class TripFormModal implements OnChanges {
       
       this.tripsService.getTripById(this.id()!).subscribe({
         next: (existingTrip) => {
+          console.log('הנתונים שהגיעו מהשרת:', existingTrip);
         
           this.tripForm.patchValue({
             name: existingTrip.name,
