@@ -1,4 +1,3 @@
-
 <div class="form-container">
   
   <h2>{{ isEditMode ? 'עריכת טיול קיים' : 'הוספת טיול חדש' }}</h2>
@@ -8,7 +7,6 @@
     <div class="form-group">
       <label for="name">שם הטיול:</label>
       <input id="name" type="text" formControlName="name" />
-      
       @if (tripForm.get('name')?.invalid && tripForm.get('name')?.touched) {
         <small class="error-message">שם הטיול הוא שדה חובה</small>
       }
@@ -17,10 +15,40 @@
     <div class="form-group">
       <label for="destination">יעד הטיול:</label>
       <input id="destination" type="text" formControlName="destination" />
-      
       @if (tripForm.get('destination')?.invalid && tripForm.get('destination')?.touched) {
         <small class="error-message">יעד הטיול הוא שדה חובה</small>
       }
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="startDate">תאריך התחלה:</label>
+        <input id="startDate" type="date" formControlName="startDate" />
+        @if (tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched) {
+          <small class="error-message">חובה לבחור תאריך התחלה</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">תאריך סיום:</label>
+        <input id="endDate" type="date" formControlName="endDate" />
+        @if (tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched) {
+          <small class="error-message">חובה לבחור תאריך סיום</small>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="price">מחיר ($):</label>
+      <input id="price" type="number" formControlName="price" />
+      @if (tripForm.get('price')?.invalid && tripForm.get('price')?.touched) {
+        <small class="error-message">חובה להזין מחיר תקין (גבוה מ-0)</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">תיאור הטיול:</label>
+      <textarea id="description" formControlName="description" rows="3"></textarea>
     </div>
 
     <div class="form-group">

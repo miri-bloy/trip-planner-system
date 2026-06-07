@@ -52,14 +52,10 @@
   ],
   "trips": [
     {
-      "id": "1",
       "name": "Paris City Tour",
       "destination": "Paris, France",
-      "startDate": "2026-03-15",
-      "endDate": "2026-03-20",
-      "price": 1500,
-      "description": "Explore the Eiffel Tower, Louvre Museum, and Seine river cruise.",
-      "image": "https://picsum.photos/id/1011/400/200"
+      "image": "https://picsum.photos/id/1011/400/200",
+      "id": "1"
     },
     {
       "id": "2",
@@ -153,56 +149,54 @@
     }
   ],
   "bookings": [
-   
-  {
-    "id": "1",
-    "tripId": "1",
-    "userId": "1",
-    "people": 2
-  },
-  {
-    "id": "2",
-    "tripId": "2",
-    "userId": "3",
-    "people": 1
-  },
-  {
-    "id": "3",
-    "tripId": "3",
-    "userId": "1",
-    "people": 3
-  },
-  {
-    "id": "4",
-    "tripId": "5",
-    "userId": "4",
-    "people": 2
-  },
-  {
-    "id": "5",
-    "tripId": "8",
-    "userId": "3",
-    "people": 1
-  },
-  {
-    "id": "6",
-    "tripId": "10",
-    "userId": "1",
-    "people": 2
-  },
-  {
-    "id": "7",
-    "tripId": "1",
-    "userId": "1",
-    "people": 3
-  },
-  {
-    "id": "7",
-    "tripId": "1",
-    "userId": "2",
-    "people": 3
-  }
-
+    {
+      "id": "1",
+      "tripId": "1",
+      "userId": "1",
+      "people": 2
+    },
+    {
+      "id": "2",
+      "tripId": "2",
+      "userId": "3",
+      "people": 1
+    },
+    {
+      "id": "3",
+      "tripId": "3",
+      "userId": "1",
+      "people": 3
+    },
+    {
+      "id": "4",
+      "tripId": "5",
+      "userId": "4",
+      "people": 2
+    },
+    {
+      "id": "5",
+      "tripId": "8",
+      "userId": "3",
+      "people": 1
+    },
+    {
+      "id": "6",
+      "tripId": "10",
+      "userId": "1",
+      "people": 2
+    },
+    {
+      "id": "7",
+      "tripId": "1",
+      "userId": "1",
+      "people": 3
+    },
+    {
+      "id": "7",
+      "tripId": "1",
+      "userId": "2",
+      "people": 3
+    }
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
