@@ -32,7 +32,7 @@ getBookingsByTripId(tripId: string | undefined): Observable<Booking[]> {
 
   //קבלת כל ההזמנות ע"פ מזהה טיול ומזהה משתמש
   getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}?TripId=${tripId}`);
+    return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}&tripId=${tripId}`);
   }
 
   // יצירת הזמנה חדשה לטיול

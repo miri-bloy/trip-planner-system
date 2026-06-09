@@ -18,9 +18,8 @@ export const routes: Routes = [
         children: [
             { path: 'home', component: Welcome },
             { path: 'all-trips', component: AllTrips },
-            { path: 'all-trips/:id', component: TripDetails },
+            { path: 'all-trips/:tripID', component: TripDetails },
             { path: 'my-trips', component: MyTrips },
-            { path: 'my-trips/:id', component: TripDetails },
             { path: 'add-trip', component: TripFormModal},
             { path: 'edit-trip/:id', component: TripFormModal },
         ]

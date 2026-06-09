@@ -4,6 +4,7 @@
     [src]="currentTrip().image"
     [alt]="currentTrip().name"
     class="trip-image"
+    (click)="goToTripDetails()" style="cursor: pointer;"
   />
 
   <div class="trip-content">
