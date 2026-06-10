@@ -1,89 +1,100 @@
 # Trip Planner System - Angular Project
 
-<p dir="ltr" align="left">מערכת לניהול ותכנון טיולים שנבנתה כפרויקט מסכם עבור קורס אנגולר (תשפ"ו).</p>
-<p dir="ltr" align="left">המערכת מאפשרת למשתמשים לצפות בטיולים, לסנן ולמיין אותם, להירשם לטיולים ולנהל את ההזמנות שלהם, לצד ממשק ניהול (Admin) להוספה, עריכה ומחיקה של טיולים.</p>
+A comprehensive tour and trip planning system built as a final project for the Angular course (2026). The application allows users to browse, filter, and register for trips, while providing an authorized Admin interface to manage the available trips via a simulated REST API (JSON Server).
 
 ---
 
-## 📂 מבנה התיקיות בפרויקט (Project Structure)
+## 📂 Project Structure
 
-<p dir="ltr" align="left">הפרויקט מנוהל תחת תקיית client ובנוי בצורה מודולרית המפרידה בין עמודי האפליקציה המרכזיים, רכיבי משנה עצמאיים ושירותי לוגיקה:</p>
+The project is structured modularly within the `client` directory, separating pages, reusable components, and core services:
 
-* `src/app/pages/` - <p dir="ltr" align="left">מכיל את עמודי המערכת הראשיים המנוהלים על ידי הראוטינג (all-trips, home, login, my-trips, register, trip-details).</p>
-* `src/app/components/` - <p dir="ltr" align="left">רכיבי משנה לשימוש חוזר בעמודים השונים (trip-card לתצוגת טיול בודד, trip-filters לסינון, trip-form-modal כטופס מודאלי לעדכון והוספה, ו-welcome להודעה כללית).</p>
-* `src/app/services/` - <p dir="ltr" align="left">מכיל את שירותי המערכת לניהול קריאות ה-HTTP והלוגיקה העסקית (auth.service.ts, booking.service.ts, trips.service.ts).</p>
-* `src/app/app.routes.ts` - <p dir="ltr" align="left">קובץ ניתוב הנתיבים (Routing) של האפליקציה בדפדפן.</p>
-
----
-
-## ⚙️ חלוקת אחריות ושירותים מרכזיים (Services)
-
-<p dir="ltr" align="left">המערכת משתמשת בארכיטקטורת Services על מנת לנתק את הלוגיקה העסקית והתקשורת מול ה-JSON Server משכבת התצוגה.</p>
-
-### 1. `AuthService`
-* **נתיב קובץ:** `src/app/services/auth.service.ts`
-* **תפקיד:** <p dir="ltr" align="left">ניהול זרימת ההתחברות והרישום, שמירת המצב של המשתמש הנוכחי המחובר, וביצוע אימות מול השרת.</p>
-* **פונקציות מרכזיות:**
-  * `login(credentials)` - <p dir="ltr" align="left">שולחת קריאת GET/POST לבדיקת פרטי משתמש לפי name ו-password.</p>
-  * `register(newUser)` - <p dir="ltr" align="left">שולחת קריאת POST ליצירת משתמש חדש לאחר בדיקה ששם המשתמש אינו תפוס.</p>
-  * `logout()` - <p dir="ltr" align="left">מאפסת את מצב המשתמש ומנתקת אותו.</p>
-
-### 2. `TripsService`
-* **נתיב קובץ:** `src/app/services/trips.service.ts`
-* **תפקיד:** <p dir="ltr" align="left">ניהול כל הישויות של הטיולים במערכת, תמיכה בפעולות CRUD עבור מנהל המערכת.</p>
-* **פונקציות מרכזיות:**
-  * `getTrips()` - <p dir="ltr" align="left">משיכת כל הטיולים מהנתיב GET /trips.</p>
-  * `getTripById(id)` - <p dir="ltr" align="left">משיכת פרטי טיול ספציפי (GET /trips/:id).</p>
-  * `createTrip(trip)` - <p dir="ltr" align="left">הוספת טיול חדש (POST /trips) - זמין לאדמין בלבד.</p>
-  * `updateTrip(id, trip)` - <p dir="ltr" align="left">עדכון טיול קיים (PUT /trips/:id).</p>
-  * `deleteTrip(id)` - <p dir="ltr" align="left">מחיקת טיול (DELETE /trips/:id).</p>
-
-### 3. `BookingService`
-* **נתיב קובץ:** `src/app/services/booking.service.ts`
-* **תפקיד:** <p dir="ltr" align="left">ניהול רישום המשתמשים לטיולים השונים וביטולי הרשמות.</p>
-* **פונקציות מרכזיות:**
-  * `getBookings()` - <p dir="ltr" align="left">משיכת כל ההזמנות במערכת.</p>
-  * `createBooking(booking)` - <p dir="ltr" align="left">יצירת הזמנה חדשה לטיול (POST /bookings).</p>
-  * `cancelBooking(bookingId)` - <p dir="ltr" align="left">ביטול הזמנה ומחיקתה מהשרת.</p>
+* `src/app/pages/` - Contains the main routed application screens (`all-trips`, `home`, `login`, `my-trips`, `register`, `trip-details`).
+* `src/app/components/` - Houses reusable sub-components used across different pages (`trip-card` for single trip display, `trip-filters` for search control, `trip-form-modal` for adding/editing trips, and `welcome` for the dashboard greetings).
+* `src/app/services/` - Contains the logic and HTTP communication services (`auth.service.ts`, `booking.service.ts`, `trips.service.ts`).
+* `src/app/app.routes.ts` - Defines the client-side routing paths for navigation.
 
 ---
 
-## 🔄 תהליכים מרכזיים באפליקציה (Application Flows)
+## ⚙️ Services & Architecture
 
-### 1. זרימת התחברות ורישום (Login & Register Flow)
-* **התחברות:** <p dir="ltr" align="left">עמוד login (בנתיב src/app/pages/login/) מנהל טופס המקבל שם וסיסמה. בעת הפעלת onSubmit(), מבוצעת קריאה ל-login() ב-AuthService. השירות בודק מול ה-API בנתיב /users האם קיים משתמש תואם. אם כן, המשתמש נשמר במערכת והאפליקציה מנווטת לעמוד home. אם לא, מוצגת שגיאה מתאימה.</p>
-* **רישום:** <p dir="ltr" align="left">עמוד register מנהלת טופס עם וידוא סיסמה. פונקציית הרישום מוודאת תחילה ששם המשתמש אינו קיים במערכת, ואם הוא ייחודי, מבוצעת קריאת POST /users והמשתמש מועבר למסך home.</p>
+The application implements a decoupled architecture where business logic and REST API interactions are isolated from the presentation layer using Angular Services.
 
-### 2. זרימת הרשמה וביטול טיול (Booking Flow)
-* **בדיקת הרשמה כפולה:** <p dir="ltr" align="left">בעת כניסה לעמוד פרטי טיול (trip-details), המערכת קוראת ל-getBookings() כדי לבדוק האם המשתמש המחובר כבר רשום לטיול זה. במידה וכן, כפתור "הירשם" נחסם אוטומטית (Disabled) ומוצגת הודעה: "משתמש רשום כבר לטיול".</p>
-* **הרשמה:** <p dir="ltr" align="left">לחיצה על "הרשם" מפעילה את createBooking() ב-BookingService, אשר מעדכנת את ה-API בנתיב POST /bookings עם מזהה המשתמש, מזהה הטיול וכמות הנוסעים שהוזנה.</p>
-* **ביטול הרשמה:** <p dir="ltr" align="left">בעמוד my-trips, המשתמש צופה בטיולים שלו. לחיצה על "בטל הרשמה" מפעילה את פונקציית הביטול בשירות, שמבצעת מחיקה מהשרת ומעדכנת את התצוגה באופן מיידי.</p>
+### 1. AuthService
+* **Path:** `src/app/services/auth.service.ts`
+* **Responsibility:** Manages user session state, handles the login validation, and handles user registration.
+* **Core Functions:**
+  * `login(credentials)` - Validates user credentials against the `/users` endpoint using `name` and `password`.
+  * `register(newUser)` - Verifies username uniqueness and performs a `POST` request to register a new user.
+  * `logout()` - Resets the current authenticated user state and clears the session.
+
+### 2. TripsService
+* **Path:** `src/app/services/trips.service.ts`
+* **Responsibility:** Manages all trip entities and provides full CRUD capabilities for authorized Admin profiles.
+* **Core Functions:**
+  * `getTrips()` - Fetches the collection of available trips (`GET /trips`).
+  * `getTripById(id)` - Fetches detailed information for a specific trip (`GET /trips/:id`).
+  * `createTrip(trip)` - Adds a new trip record (`POST /trips`) - Admin access only.
+  * `updateTrip(id, trip)` - Modifies an existing trip (`PUT /trips/:id`).
+  * `deleteTrip(id)` - Removes a trip from the database (`DELETE /trips/:id`).
+
+### 3. BookingService
+* **Path:** `src/app/services/booking.service.ts`
+* **Responsibility:** Handles user trip registrations, reservations tracking, and booking cancellations.
+* **Core Functions:**
+  * `getBookings()` - Fetches all registration data from the server.
+  * `createBooking(booking)` - Registers a user to a specific trip (`POST /bookings`).
+  * `cancelBooking(bookingId)` - Deletes an existing registration record.
 
 ---
 
-## 📊 ניהול מצב (State Management)
+## 🔄 Application Flows
 
-<p dir="ltr" align="left">האפליקציה מנהלת את המצב (State) שלה בצורה ריאקטיבית באמצעות שירותים מרכזיים המשמשים כ-Single Source of Truth, תוך שימוש ב-BehaviorSubject ו-Observables:</p>
+### 1. Login & Register Flow
+* **Authentication:** The `login` page manages a reactive form capturing user inputs. On `onSubmit()`, it triggers the `AuthService.login()`, checking the credentials against the mock backend. Upon matching, the user profile is stored reactively, and the app routes to `/home`. Invalid entries show an appropriate error message.
+* **Registration:** The `register` page handles account creation. It verifies the username availability and posts the validated entity to the backend database before redirecting to the home screen.
 
-* <p dir="ltr" align="left">המשתמש המחובר הנוכחי מנוהל בתוך AuthService על ידי משתנה מסוג BehaviorSubject. כל עמוד (כמו עמוד home להצגת השם בכותרת או עמוד all-trips לבדיקת הרשאות אדמין) נרשם (Subscribe) ל-Observable זה ומקבל עדכון חי בכל שינוי במצב החיבור.</p>
-* <p dir="ltr" align="left">רשימות הטיולים וההזמנות נמשכות מהשרת ומנוהלות ב-Services כדי למנוע קריאות כפולות ומיותרות ל-API ולשמור על סנכרון נתונים מלא בין קומפוננטות ועמודים שונים.</p>
-
----
-
-## 🛠 סינון ומיון (Filtering & Sorting)
-
-<p dir="ltr" align="left">בעמוד all-trips נעשה שימוש ברכיב המשנה trip-filters, בו ממומשת לוגיקת סינון ומיון דינמית על גבי רשימת הטיולים:</p>
-
-* **סינון:** <p dir="ltr" align="left">מתבצע בזמן אמת לפי שלושה פרמטרים: יעד (טקסט חופשי), תאריך, ומחיר מקסימלי, באמצעות פונקציית filterTrips().</p>
-* **מיון:** <p dir="ltr" align="left">המשתמש יכול למיין את הרשימה לפי מחיר או תאריך (בסדר עולה/יורד) באמצעות פונקציית sortTrips().</p>
+### 2. Booking & Validation Flow
+* **Duplicate Prevention:** When a user navigates to a trip details view, the system calls `BookingService.getBookings()` to verify existing registrations. If the user is already registered for that tour, the registration button is automatically disabled, displaying a restriction notice.
+* **Booking Creation:** Clicking the active registration button calls `createBooking()`, updating the backend with the traveler count and specific user details.
+* **Cancellation:** In the `my-trips` view, users can view their current bookings. Triggering "Cancel Booking" dispatches a deletion request to the database, instantly refreshing the template data.
 
 ---
 
-## 🚀 הוראות הרצה (Installation & Setup)
+## 📊 State Management
 
-<p dir="ltr" align="left">כדי להריץ את הפרויקט באופן מקומי, יש לעקוב אחר הצעדים הבאים:</p>
+The application state is handled reactively using services as a Single Source of Truth via RxJS `BehaviorSubject` and `Observables`:
 
-1. **שכפול הפרויקט מהגיטהאב:**
-   ```bash
-   git clone <קישור לריפוזיטורי שלכן>
+* The active user session is exposed inside `AuthService` via a `BehaviorSubject`. Views like `home` (to dynamically render user details) and `all-trips` (to evaluate Admin permissions) subscribe to this stream to dynamically update the view according to changes.
+* Data arrays for trips and bookings are managed within their respective services to prevent repetitive, redundant API calls and keep views synchronized.
+
+---
+
+## 🛠 Filtering & Sorting
+
+The `all-trips` page incorporates the `trip-filters` sub-component to offer dynamic data mutations over the displayed trip list:
+
+* **Filtering:** Implements real-time filtering through user inputs based on destination, travel date, and maximum price boundaries via `filterTrips()`.
+* **Sorting:** Offers ordering options allowing sorting by price and date criteria in ascending or descending order via `sortTrips()`.
+
+---
+
+## 🚀 Installation & Setup
+
+Follow these steps to configure and run the project locally:
+
+1. **Clone the repository:**
+   git clone <your-repository-url>
    cd TRIP-PLANNER-SYSTEM/client
+
+2. **Install project dependencies:**
+   npm install
+
+3. **Start the Mock Backend (JSON Server):**
+   Ensure json-server is available on your local system, then launch the database observer:
+   json-server --watch db.json
+
+4. **Launch the Angular Application:**
+   In a separate terminal workspace, spin up the local development server:
+   ng serve
+   
+   Open your browser and navigate to: http://localhost:4200
