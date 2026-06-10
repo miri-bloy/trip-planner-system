@@ -1,0 +1,109 @@
+/* קובץ עיצוב משותף לעמודי login ו-register 
+  שני העמודים משתמשים במבנה זהה של register-container
+*/
+
+.register-container {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  max-width: 450px;
+  margin: 4rem auto;
+  box-shadow: var(--shadow-md);
+  text-align: right;
+}
+
+.register-container h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-top: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.register-container label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--slate-900);
+  background-color: #ffffff;
+  outline: none;
+  font-family: var(--font-family);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.register-container input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+/* הודעות שגיאה של ולידציה */
+.register-container small {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 0.35rem;
+}
+
+/* כפתור שליחה ראשי */
+.register-container button[type="submit"] {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--primary);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  margin-top: 1rem;
+}
+
+.register-container button[type="submit"]:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+.register-container button[type="submit"]:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.register-container button[type="submit"]:disabled {
+  background-color: var(--slate-200);
+  color: var(--slate-400);
+  cursor: not-allowed;
+}
+
+/* קישור למעבר עמודים */
+.register-container p {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--slate-500);
+  margin-top: 1.5rem;
+}
+
+.register-container p a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-container p a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,90 @@
+/* עיצוב לדפי רשימות הטיולים (all-trips, my-trips) */
+
+.trips-container {
+  max-w: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* כפתור הוספת טיול של אדמין */
+.trips-container > button {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.trips-container > button:hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* פריסת הגריד של כרטיסי הטיול */
+.trips-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* עטיפת רשת הכרטיסים */
+@media (min-width: 640px) {
+  .trips-container {
+    display: block; /* מחזיר לבלוק רגיל תומך סינונים */
+  }
+}
+
+/* נגדיר גריד עבור כרטיסי הטיול שנוצרים מתחת לסינונים */
+app-trip-card {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  /* תצוגה מבוזרת של כרטיסים */
+  .trips-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* מניעת פגיעה של הגריד ברכיב הסינונים העליון */
+  app-trip-filters {
+    grid-column: 1 / -1;
+  }
+  
+  .trips-container > button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+.trip-card-wrapper {
+  position: relative; /* הופך את המיכל לנקודת עוגן עבור החיווי הצף */
+  display: flex;
+  flex-direction: column;
+}
+
+.registered-badge {
+  position: absolute;  /* הופך את החיווי לצף מעל הכרטיס */
+  top: 12px;           /* מרחק מהקצה העליון של התמונה */
+  right: 12px;          /* מרחק מהקצה הימני של התמונה */
+  z-index: 10;         /* מוודא שהוא יצוף מעל התמונה ולא ייעלם מאחוריה */
+  
+  background-color: rgba(240, 253, 244, 0.95); /* רקע ירוק בהיר עם שקיפות עדינה */
+  color: #16a34a; 
+  border: 1px solid #bbf7d0; 
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px; /* פינות מעוגלות כמו בלון/מדבקה */
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל עדין כדי שיבלוט על רקע התמונה */
+}

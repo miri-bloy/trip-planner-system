@@ -1,0 +1,108 @@
+/* קובץ עיצוב לקומפוננטת Welcome בסגנון אלפיני נקי */
+
+.welcome-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+/* מדליה / אייקון עליון */
+.welcome-badge {
+  display: inline-block;
+  padding: 0.85rem 1rem;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid #bfdbfe; /* תואם לעיצוב הבהיר */
+  border-radius: var(--radius-lg);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* כותרת ראשית */
+.welcome-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  letter-spacing: -0.025em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .welcome-title {
+    font-size: 2.75rem;
+  }
+}
+
+/* תיאור העמוד */
+.welcome-description {
+  font-size: 1rem;
+  color: var(--slate-500);
+  max-width: 650px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .welcome-description {
+    font-size: 1.1rem;
+  }
+}
+
+/* גריד הכרטיסים */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* כרטיס יתרון בודד */
+.feature-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: left; /* יישור שמאלה עבור אנגלית */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--slate-300);
+}
+
+/* כותרת בתוך כרטיס */
+.feature-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.feature-icon {
+  font-size: 1.1rem;
+}
+
+/* תיאור בתוך כרטיס */
+.feature-desc {
+  font-size: 0.8rem;
+  color: var(--slate-500);
+  line-height: 1.5;
+  margin: 0;
+}

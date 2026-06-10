@@ -14,7 +14,14 @@
   }
 
   @for (trip of filteredTrips(); track trip.id) {
-    <app-trip-card [currentTrip]="trip"></app-trip-card>
+    <div class="trip-card-wrapper">
+      
+      @if (isUserRegisteredToTrip(trip.id)) {
+        <p class="registered-badge">✓ את/ה רשום/ה לטיול זה!</p>
+      }
+      
+      <app-trip-card [currentTrip]="trip"></app-trip-card>
+    </div>
   }
 
 </div>

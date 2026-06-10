@@ -1,0 +1,156 @@
+/* קובץ עיצוב לדף פרטי הטיול המורחבים (trip-details) */
+
+:host {
+  display: block;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+/* כותרת הטיול */
+h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+/* יעד ותאריכים */
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--slate-500);
+  margin-bottom: 1rem;
+}
+
+/* תיאור */
+h3:nth-of-type(1) {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--slate-700);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-100);
+}
+
+/* פרטים יבשים: תאריכים ומחיר */
+h3:nth-of-type(2), 
+h3:nth-of-type(3) {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  margin-bottom: 0.5rem;
+}
+
+h3:nth-of-type(3) {
+  color: var(--primary);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+/* תמונת הטיול המרכזית */
+img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+/* קופסת ההרשמה והמחיר */
+div:has(#peopleInput), 
+div:has(p) {
+  background-color: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-top: 1.5rem;
+}
+
+label[for="people"] {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* שדה קלט כמות נרשמים */
+input[type="number"] {
+  padding: 0.65rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  width: 100%;
+  max-width: 120px;
+  outline: none;
+  font-family: var(--font-family);
+  transition: border-color 0.15s;
+}
+
+input[type="number"]:focus {
+  border-color: var(--primary);
+}
+
+/* פסקת סכום לתשלום */
+div p {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin: 1rem 0 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--slate-100);
+}
+
+/* כפתור הרשמה וביטול רישום */
+button {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+/* כפתור הרשמה (רגיל) */
+button:not(:has(+ p)):not([click*="cancel"]) {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+button:not(:has(+ p)):not([click*="cancel"]):hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* כפתור ביטול רישום (אדום) */
+button[click*="cancel"], 
+button:has(span:contains("בטל")) {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+button[click*="cancel"]:hover {
+  background-color: #fecaca;
+  color: #dc2626;
+}
+
+/* הודעת "טוען פרטי טיול" */
+p:not(div p) {
+  font-size: 1.1rem;
+  color: var(--slate-400);
+  text-align: center;
+  padding: 3rem 0;
+}

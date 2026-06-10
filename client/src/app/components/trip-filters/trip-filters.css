@@ -1,0 +1,53 @@
+/* קובץ עיצוב לפס הסינונים והמיונים */
+
+.filters-container {
+  background: #ffffff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700);
+}
+
+.filter-group input, 
+.filter-group select {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--slate-900);
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-family);
+}
+
+.filter-group input::placeholder {
+  color: var(--slate-400);
+}
+
+.filter-group input:focus, 
+.filter-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+/* התאמת דפדפנים לתאריך */
+.filter-group input[type="date"] {
+  color: var(--slate-900);
+}

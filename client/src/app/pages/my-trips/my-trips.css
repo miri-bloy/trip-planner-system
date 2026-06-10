@@ -1,0 +1,100 @@
+/* עיצוב לדפי רשימות הטיולים (all-trips, my-trips) */
+
+.trips-container {
+  max-w: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* כפתור הוספת טיול של אדמין */
+.trips-container > button {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.trips-container > button:hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* פריסת הגריד של כרטיסי הטיול */
+.trips-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* עטיפת רשת הכרטיסים */
+@media (min-width: 640px) {
+  .trips-container {
+    display: block; /* מחזיר לבלוק רגיל תומך סינונים */
+  }
+}
+
+/* נגדיר גריד עבור כרטיסי הטיול שנוצרים מתחת לסינונים */
+app-trip-card {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  /* תצוגה מבוזרת של כרטיסים */
+  .trips-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* מניעת פגיעה של הגריד ברכיב הסינונים העליון */
+  app-trip-filters {
+    grid-column: 1 / -1;
+  }
+  
+  .trips-container > button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+/* תדביקי רק את זה במקום ה-no-trips-message הקודם */
+.no-trips-message {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: #ffffff;
+  border: 1px solid var(--slate-200, #e2e8f0);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgb(0 0 0 / 0.05));
+  
+  max-width: 500px;
+  width: 100%;             
+  margin: 3rem auto;       /* ממרכז את הכרטיס אופקית */
+  grid-column: 1 / -1;     /* שובר את הגריד הקיים ותופס את כל רוחב המסך כדי להתמרכז */
+}
+
+.no-trips-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.no-trips-message h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--slate-900, #0f172a);
+  margin-bottom: 0.5rem;
+}
+
+.no-trips-message p {
+  font-size: 0.95rem;
+  color: var(--slate-500, #64748b);
+  line-height: 1.5;
+  margin: 0;
+}
