@@ -1,12 +1,9 @@
-/* עיצוב לדפי רשימות הטיולים (all-trips, my-trips) */
-
 .trips-container {
-  max-w: 1200px;
+  max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1.5rem;
 }
 
-/* כפתור הוספת טיול של אדמין */
 .trips-container > button {
   background-color: var(--primary);
   color: #ffffff;
@@ -28,34 +25,29 @@
   box-shadow: var(--shadow-md);
 }
 
-/* פריסת הגריד של כרטיסי הטיול */
 .trips-container {
   display: flex;
   flex-direction: column;
 }
 
-/* עטיפת רשת הכרטיסים */
 @media (min-width: 640px) {
   .trips-container {
-    display: block; /* מחזיר לבלוק רגיל תומך סינונים */
+    display: block;
   }
 }
 
-/* נגדיר גריד עבור כרטיסי הטיול שנוצרים מתחת לסינונים */
 app-trip-card {
   display: block;
   margin-bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  /* תצוגה מבוזרת של כרטיסים */
   .trips-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
   }
   
-  /* מניעת פגיעה של הגריד ברכיב הסינונים העליון */
   app-trip-filters {
     grid-column: 1 / -1;
   }
@@ -65,7 +57,7 @@ app-trip-card {
     justify-self: start;
   }
 }
-/* תדביקי רק את זה במקום ה-no-trips-message הקודם */
+
 .no-trips-message {
   text-align: center;
   padding: 3rem 1.5rem;
@@ -76,8 +68,8 @@ app-trip-card {
   
   max-width: 500px;
   width: 100%;             
-  margin: 3rem auto;       /* ממרכז את הכרטיס אופקית */
-  grid-column: 1 / -1;     /* שובר את הגריד הקיים ותופס את כל רוחב המסך כדי להתמרכז */
+  margin: 3rem auto; 
+  grid-column: 1 / -1; 
 }
 
 .no-trips-icon {

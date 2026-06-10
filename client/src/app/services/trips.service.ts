@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+// ~~~~~~~~~~~~~~~שירות לניהול הטיולים ופרטי טיול במערכת~~~~~~~~~~~~~~~~~
+
 export class TripsService {
     private http = inject(HttpClient);
     private apiUrl = 'http://localhost:3000/trips';
@@ -36,4 +39,5 @@ export class TripsService {
   deleteTrip(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  
 }

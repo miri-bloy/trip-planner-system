@@ -3,11 +3,10 @@ import { TripCard } from '../../components/trip-card/trip-card';
 import { RouterLink } from "@angular/router";
 import { TripsService } from '../../services/trips.service';
 import { AuthService } from '../../services/auth.service';
-import { BookingService } from '../../services/booking.service'; // הוספנו את השירות
+import { BookingService } from '../../services/booking.service';
 import { Trip } from '../../modules/trip.moduel';
-import { Booking } from '../../modules/booking.module'; // הוספנו את המודול
+import { Booking } from '../../modules/booking.module';
 import { TripFilters } from '../../components/trip-filters/trip-filters';
-
 
 @Component({
   selector: 'app-all-trips',
@@ -15,75 +14,76 @@ import { TripFilters } from '../../components/trip-filters/trip-filters';
   templateUrl: './all-trips.html',
   styleUrl: './all-trips.css',
 })
+
 export class AllTrips {
-   allTripsService = inject(TripsService);
-   authService = inject(AuthService);
-   bookingService = inject(BookingService); // הזרקת שירות ההזמנות
-   
-   trips = signal<Trip[]>([]);
-   myBookings = signal<Booking[]>([]); // סיגנל לשמירת ההזמנות של המשתמש הנוכחי
+  
+  allTripsService = inject(TripsService);
+  authService = inject(AuthService);
+  bookingService = inject(BookingService);
 
-   selectedDestination = signal<string>('');
-   selectedDate = signal<string>('');
-   priceSortOrder = signal<string>('default');
-   maxPrice = signal<number>(0);
+  trips = signal<Trip[]>([]);
+  myBookings = signal<Booking[]>([]);
+  selectedDestination = signal<string>('');
+  selectedDate = signal<string>('');
+  priceSortOrder = signal<string>('default');
+  maxPrice = signal<number>(0);
 
-   constructor() {
-     // האזנה למשתמש מחובר והבאת ההזמנות שלו לחיווי הירוק
-     effect(() => {
-       const user = this.authService.currentUser();
-       if (user && user.id) {
-         this.bookingService.getBookings().subscribe(allBookings => {
-           const filteredBookings = allBookings.filter(booking => String(booking.userId) === String(user.id));
-           this.myBookings.set(filteredBookings);
-         });
-       } else {
-         this.myBookings.set([]);
-       }
-     });
-   }
+  constructor() {
+    effect(() => {
+      const user = this.authService.currentUser();
+      if (user && user.id) {
+        this.bookingService.getBookings().subscribe(allBookings => {
+          const filteredBookings = allBookings.filter(booking => String(booking.userId) === String(user.id));
+          this.myBookings.set(filteredBookings);
+        });
+      } else {
+        this.myBookings.set([]);
+      }
+    });
+  }
 
-   ngOnInit() {
-     this.allTripsService.getTrips().subscribe(data => {
-       this.trips.set(data);
-     });
-   }
+  ngOnInit() {
+    this.allTripsService.getTrips().subscribe(data => {
+      this.trips.set(data);
+    });
+  }
 
-   
-isUserRegisteredToTrip(tripId: string | undefined): boolean {
-  if (!tripId) return false; 
-  return this.myBookings().some(booking => String(booking.tripId) === tripId);
-}
 
-   filteredTrips = computed(() => {
-     let trips = [...this.trips()];
+  isUserRegisteredToTrip(tripId: string | undefined): boolean {
+    if (!tripId) return false;
+    return this.myBookings().some(booking => String(booking.tripId) === tripId);
+  }
 
-     const destQuery = this.selectedDestination().toLowerCase().trim();
-     if (destQuery) {
-       trips = trips.filter(trip => 
-         trip.destination.toLowerCase().includes(destQuery)
-       );
-     }
+  //פונקציית סינון דינאמית
+  filteredTrips = computed(() => {
+    let trips = [...this.trips()];
 
-     const dateQuery = this.selectedDate();
-     if (dateQuery) {
-       trips = trips.filter(trip => trip.startDate >= dateQuery);
-     }
+    const destQuery = this.selectedDestination().toLowerCase().trim();
+    if (destQuery) {
+      trips = trips.filter(trip =>
+        trip.destination.toLowerCase().includes(destQuery)
+      );
+    }
 
-     const priceLimit = this.maxPrice();
-     if (priceLimit > 0) {
-       trips = trips.filter(trip => trip.price <= priceLimit);
-     }
-     if (this.priceSortOrder() === 'priceAsc') {
-       trips.sort((a, b) => a.price - b.price);
-     } else if (this.priceSortOrder() === 'priceDesc') {
-       trips.sort((a, b) => b.price - a.price);
-     } else if (this.priceSortOrder() === 'dateAsc') {
-       trips.sort((a, b) => a.startDate.localeCompare(b.startDate));
-     } else if (this.priceSortOrder() === 'dateDesc') {
-       trips.sort((a, b) => b.startDate.localeCompare(a.startDate));
-     }
+    const dateQuery = this.selectedDate();
+    if (dateQuery) {
+      trips = trips.filter(trip => trip.startDate >= dateQuery);
+    }
 
-     return trips;
-   });
+    const priceLimit = this.maxPrice();
+    if (priceLimit > 0) {
+      trips = trips.filter(trip => trip.price <= priceLimit);
+    }
+    if (this.priceSortOrder() === 'priceAsc') {
+      trips.sort((a, b) => a.price - b.price);
+    } else if (this.priceSortOrder() === 'priceDesc') {
+      trips.sort((a, b) => b.price - a.price);
+    } else if (this.priceSortOrder() === 'dateAsc') {
+      trips.sort((a, b) => a.startDate.localeCompare(b.startDate));
+    } else if (this.priceSortOrder() === 'dateDesc') {
+      trips.sort((a, b) => b.startDate.localeCompare(a.startDate));
+    }
+
+    return trips;
+  });
 }

@@ -12,6 +12,8 @@ import { Booking } from '../../modules/booking.module';
   templateUrl: './trip-details.html',
   styleUrl: './trip-details.css',
 })
+
+
 export class TripDetails implements OnInit {
 
   tripsService = inject(TripsService);

@@ -1,5 +1,3 @@
-/* קובץ עיצוב לדף פרטי הטיול המורחבים (trip-details) */
-
 :host {
   display: block;
   max-width: 800px;
@@ -7,7 +5,6 @@
   padding: 0 1.5rem;
 }
 
-/* כותרת הטיול */
 h1 {
   font-size: 2.25rem;
   font-weight: 800;
@@ -17,7 +14,6 @@ h1 {
   line-height: 1.2;
 }
 
-/* יעד ותאריכים */
 h2 {
   font-size: 1.25rem;
   font-weight: 600;
@@ -25,7 +21,6 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/* תיאור */
 h3:nth-of-type(1) {
   font-size: 1.1rem;
   font-weight: 400;
@@ -38,7 +33,6 @@ h3:nth-of-type(1) {
   border: 1px solid var(--slate-100);
 }
 
-/* פרטים יבשים: תאריכים ומחיר */
 h3:nth-of-type(2), 
 h3:nth-of-type(3) {
   font-size: 0.95rem;
@@ -54,7 +48,6 @@ h3:nth-of-type(3) {
   margin-bottom: 1.5rem;
 }
 
-/* תמונת הטיול המרכזית */
 img {
   width: 100%;
   max-height: 400px;
@@ -64,7 +57,6 @@ img {
   margin-bottom: 2rem;
 }
 
-/* קופסת ההרשמה והמחיר */
 div:has(#peopleInput), 
 div:has(p) {
   background-color: #ffffff;
@@ -83,7 +75,6 @@ label[for="people"] {
   margin-bottom: 0.5rem;
 }
 
-/* שדה קלט כמות נרשמים */
 input[type="number"] {
   padding: 0.65rem;
   border: 1px solid var(--slate-200);
@@ -100,7 +91,6 @@ input[type="number"]:focus {
   border-color: var(--primary);
 }
 
-/* פסקת סכום לתשלום */
 div p {
   font-size: 1.1rem;
   font-weight: 700;
@@ -110,7 +100,6 @@ div p {
   border-top: 1px solid var(--slate-100);
 }
 
-/* כפתור הרשמה וביטול רישום */
 button {
   width: 100%;
   padding: 0.85rem;
@@ -123,7 +112,6 @@ button {
   margin-top: 1rem;
 }
 
-/* כפתור הרשמה (רגיל) */
 button:not(:has(+ p)):not([click*="cancel"]) {
   background-color: var(--primary);
   color: #ffffff;
@@ -135,7 +123,6 @@ button:not(:has(+ p)):not([click*="cancel"]):hover {
   box-shadow: var(--shadow-md);
 }
 
-/* כפתור ביטול רישום (אדום) */
 button[click*="cancel"], 
 button:has(span:contains("בטל")) {
   background-color: #fee2e2;
@@ -147,7 +134,6 @@ button[click*="cancel"]:hover {
   color: #dc2626;
 }
 
-/* הודעת "טוען פרטי טיול" */
 p:not(div p) {
   font-size: 1.1rem;
   color: var(--slate-400);

@@ -1,5 +1,3 @@
-/* קובץ עיצוב לטופס יצירה/עריכה (קומפוננטת טופס) */
-
 .form-container {
   background: #ffffff;
   border: 1px solid var(--slate-200);
@@ -16,7 +14,7 @@
   color: var(--slate-900);
   margin-top: 0;
   margin-bottom: 1.5rem;
-  border-b: 1px solid var(--slate-100);
+  border-bottom: 1px solid var(--slate-100);
   padding-bottom: 0.75rem;
 }
 

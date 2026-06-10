@@ -1,5 +1,3 @@
-/* קובץ עיצוב לקומפוננטת Welcome בסגנון אלפיני נקי */
-
 .welcome-container {
   max-width: 900px;
   margin: 0 auto;
@@ -7,20 +5,18 @@
   text-align: center;
 }
 
-/* מדליה / אייקון עליון */
 .welcome-badge {
   display: inline-block;
   padding: 0.85rem 1rem;
   background-color: var(--primary-light);
   color: var(--primary);
-  border: 1px solid #bfdbfe; /* תואם לעיצוב הבהיר */
+  border: 1px solid #bfdbfe;
   border-radius: var(--radius-lg);
   font-size: 2rem;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-sm);
 }
 
-/* כותרת ראשית */
 .welcome-title {
   font-size: 2.25rem;
   font-weight: 800;
@@ -37,7 +33,6 @@
   }
 }
 
-/* תיאור העמוד */
 .welcome-description {
   font-size: 1rem;
   color: var(--slate-500);
@@ -52,7 +47,6 @@
   }
 }
 
-/* גריד הכרטיסים */
 .features-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -67,14 +61,13 @@
   }
 }
 
-/* כרטיס יתרון בודד */
 .feature-card {
   background: #ffffff;
   padding: 1.5rem;
   border: 1px solid var(--slate-200);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  text-align: left; /* יישור שמאלה עבור אנגלית */
+  text-align: left;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -84,7 +77,6 @@
   border-color: var(--slate-300);
 }
 
-/* כותרת בתוך כרטיס */
 .feature-title {
   display: flex;
   align-items: center;
@@ -99,7 +91,6 @@
   font-size: 1.1rem;
 }
 
-/* תיאור בתוך כרטיס */
 .feature-desc {
   font-size: 0.8rem;
   color: var(--slate-500);

@@ -3,37 +3,30 @@
 
   <form (ngSubmit)="loginForm.form.valid && onSubmit()" #loginForm="ngForm" novalidate>
     
-    <div>
+    <div class="form-group">
       <label>כתובת מייל:</label>
       <input type="email" [(ngModel)]="userModel.email" name="userEmail" #emailLogin="ngModel" required email>
       @if (emailLogin.invalid && emailLogin.touched) {
-        @if (emailLogin.errors?.['required']) {
-          <small style="color: red; display: block;">נא להזין כתובת מייל.</small>
-        }
-        @if (emailLogin.errors?.['email']) {
-          <small style="color: red; display: block;">פורמט המייל אינו תקין.</small>
-        }
+        @if (emailLogin.errors?.['required']) { <small class="error-msg">נא להזין כתובת מייל.</small> }
+        @if (emailLogin.errors?.['email']) { <small class="error-msg">פורמט המייל אינו תקין.</small> }
       }
     </div>
     
-    <div>
+    <div class="form-group">
       <label>סיסמה:</label>
       <input type="password" [(ngModel)]="userModel.password" name="userPassword" #passLogin="ngModel" required>
       @if (passLogin.invalid && passLogin.touched) {
-        <small style="color: red; display: block;">נא להזין סיסמה.</small>
+        <small class="error-msg">נא להזין סיסמה.</small>
       }
     </div>
 
     @if (error()) {
-      <p style="color: red; font-weight: bold; padding: 10px; background-color: #ffe6e6; border: 1px solid red; border-radius: 4px; margin-top: 15px;">
-        {{ error() }}
-      </p>
+      <p class="alert-error">{{ error() }}</p>
     }
 
     <button type="submit" [disabled]="loading() || loginForm.invalid">
       @if (loading()) { טוען... } @else { התחבר }
     </button>
-
   </form>
 
   <p>לא רשום עדיין? עבור ל <a routerLink="/register">דף הרשמה</a></p>

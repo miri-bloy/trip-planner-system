@@ -1,5 +1,3 @@
-/* קובץ עיצוב לפס הסינונים והמיונים */
-
 .filters-container {
   background: #ffffff;
   border: 1px solid var(--slate-200);
@@ -47,7 +45,6 @@
   box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 }
 
-/* התאמת דפדפנים לתאריך */
 .filter-group input[type="date"] {
   color: var(--slate-900);
 }

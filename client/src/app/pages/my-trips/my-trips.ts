@@ -13,6 +13,8 @@ import { TripFilters } from '../../components/trip-filters/trip-filters';
   templateUrl: './my-trips.html',
   styleUrl: './my-trips.css',
 })
+
+
 export class MyTrips implements OnInit {
 
   bookingService = inject(BookingService);
@@ -34,7 +36,6 @@ export class MyTrips implements OnInit {
     const bookings = this.myBookings();
     const trips = this.allTrips();
 
-    // סינון הטיולים שה-id שלהם קיים בתוך ה-tripId של ההזמנות שלי
     return trips.filter(trip => bookings.some(booking => String(booking.tripId) === String(trip.id)));
   });
 
@@ -46,16 +47,10 @@ export class MyTrips implements OnInit {
       if (user && user.id) {
         console.log('מזהה משתמש עודכן, מביא את כל ההזמנות מהשרת עבור סינון ידני:', user.id);
 
-        // קריאה לכל ההזמנות מהשרת
         this.bookingService.getBookings().subscribe(allBookings => {
           console.log('כל ההזמנות הגולמיות שהגיעו מהשרת:', allBookings);
-
-          // ביצוע סינון בצורה בטוחה כשהכל אצלי ביד
           const filteredBookings = allBookings.filter(booking => String(booking.userId) === String(user.id));
-
           console.log('ההזמנות המסוננות של המשתמש הנוכחי:', filteredBookings);
-
-          // עדכון הסיגנל עם ההזמנות הרלוונטיות בלבד
           this.myBookings.set(filteredBookings);
         });
       } else {
@@ -73,7 +68,7 @@ export class MyTrips implements OnInit {
     });
   }
   filteredMyTrips = computed(() => {
-    let trips = [...this.myTrips()]; //  עותק מהטיולים שלי
+    let trips = [...this.myTrips()];
 
 
     const destQuery = this.selectedDestination().toLowerCase().trim();

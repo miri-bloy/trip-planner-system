@@ -30,18 +30,12 @@ export class TripCard {
 
     this.bookingService.getBookings().subscribe({
       next: (allBookings) => {
-
-        // מסננים את כל ההזמנות שקיבלנו, ומשאירים רק את אלו של הטיול הנוכחי
         const relevantBookings = allBookings.filter(b => String(b.tripId).trim() === currentTripId);
-
         console.log('ההזמנות הרלוונטיות שנמצאו לאחר סינון:', relevantBookings);
 
-        // תנאי חסימה/ניווט לפי אורך המערך המסונן
         if (relevantBookings.length === 0) {
-          // אין נרשמים - מנווטים לעריכה
           this.router.navigate(['/edit-trip', this.currentTrip().id]);
         } else {
-          // יש נרשמים - חוסמים
           alert('לא ניתן לערוך טיול זה מכיוון שיש אליו כבר נרשמים!');
         }
       },
@@ -55,22 +49,16 @@ export class TripCard {
 
     console.log('בודק נרשמים לפני מחיקת טיול מספר:', currentTripId);
 
-    // 1. פונים לסרביס לקבלת כל ההזמנות
-    this.bookingService.getBookingsByTripId(currentTripId).subscribe({
+    this.bookingService.getBookings().subscribe({
       next: (allBookings) => {
-
-        // 2. מסננים רק את ההזמנות ששייכות לטיול הנוכחי
         const relevantBookings = allBookings.filter(
           b => String(b.tripId).trim() === currentTripId
         );
 
-        // 3. בודקים אם המערך ריק (אין נרשמים)
         if (relevantBookings.length === 0) {
-          // אין נרשמים! בטוח למחוק - נשמור את הטיול הנוכחי ונפתח את מודאל האישור
           this.tripToDelete = this.currentTrip();
           this.showDeleteModal = true;
         } else {
-          // יש נרשמים! חוסמים את הפעולה מיד ולא פותחים את המודאל
           alert('לא ניתן למחוק טיול זה מכיוון שיש אליו כבר נרשמים!');
         }
       },

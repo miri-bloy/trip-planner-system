@@ -6,6 +6,9 @@ import { User } from '../modules/user.module';
 @Injectable({
   providedIn: 'root'
 })
+
+// ~~~~~~~~~~~~~~~שירות לניהול הזדהות ופרטי משתמש במערכת~~~~~~~~~~~~~~~~~
+
 export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/users';

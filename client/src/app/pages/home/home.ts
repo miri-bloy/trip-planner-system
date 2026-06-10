@@ -8,7 +8,9 @@ import { Router, RouterLink, RouterOutlet } from "@angular/router";
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
+
 export class Home {
+  
   protected authService = inject(AuthService);
   private router = inject(Router);
 
