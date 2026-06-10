@@ -23,17 +23,13 @@ export class BookingService {
   }
   //קבלת כל ההזמנות ע"פ מזהה טיול
 getBookingsByTripId(tripId: string | undefined): Observable<Booking[]> {
-  if (!tripId) return of([]); 
-
-  const cleanId = String(tripId).trim();
-
-  return this.http.get<Booking[]>(`http://localhost:3000/trips/${cleanId}/bookings`);
+  return this.http.get<Booking[]>(`${this.apiUrl}?tripId=${tripId}`);
 }
 
-  //קבלת כל ההזמנות ע"פ מזהה טיול ומזהה משתמש
-  getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}&tripId=${tripId}`);
-  }
+  // //קבלת כל ההזמנות ע"פ מזהה טיול ומזהה משתמש
+  // getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string): Observable<Booking[]> {
+  //   return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}&tripId=${tripId}`);
+  // }
 
   // יצירת הזמנה חדשה לטיול
   createBooking(booking: Booking): Observable<Booking> {

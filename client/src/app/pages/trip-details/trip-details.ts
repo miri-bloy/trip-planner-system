@@ -22,7 +22,7 @@ export class TripDetails implements OnInit {
   tripID = input.required<string>();
   currentTrip = signal<Trip | null>(null);
   bookingDetails = signal<Booking | null>(null);
-  
+
   newBooking = signal<Booking>({
     tripId: '',
     userId: '',
@@ -62,45 +62,46 @@ export class TripDetails implements OnInit {
     });
   }
 
-  //ביטול הרשמה לטיול
-  cancelTripRegistration() {
-    const userId = this.authService.currentUser()?.id;
-    const tripId = this.currentTrip()?.id;
+ // ביטול הרשמה לטיול
+ cancelTripRegistration() {
+  const userId = this.authService.currentUser()?.id;
+  const tripId = this.currentTrip()?.id;
 
-    if (!userId || !tripId) {
-      alert('עליך להתחבר למערכת כדי לבטל הרשמה לטיול.');
-      return;
-    }
-
-    this.bookingService.getBookingsByUserIdAndTripId(userId, tripId).subscribe({
-      next: (bookings: Booking[]) => {
-        if (bookings.length === 0) {
-          console.log('לאמצאה הרשמה לביטול');
-          return;
-        }
-        const bookingId = bookings[0].id;
-        if (!bookingId) {
-          console.error('מזהה ההזמנה אינו תקין');
-          return;
-        }
-        
-        // ביצוע הביטול בפועל
-        this.bookingService.cancelBooking(bookingId).subscribe({
-          next: (response) => {
-            console.log('ההרשמה לטיול בוטלה!', response);
-            this.bookingDetails.set(null);
-            this.isRegistered.set(false);
-          },
-          error: (err) => {
-            console.error('הבקשה לביטול נכשלה:', err);
-          }
-        });
-      },
-      error: (err) => {
-        console.error('שגיאה בשליפת ההזמנות:', err);
-      }
-    });
+  if (!userId || !tripId) {
+    alert('עליך להתחבר למערכת כדי לבטל הרשמה לטיול.');
+    return;
   }
+
+  this.bookingService.getBookings().subscribe({
+    next: (allBookings: Booking[]) => {
+      const booking = allBookings.find(b => 
+        String(b.userId) === String(userId) && 
+        String(b.tripId) === String(tripId)
+      );
+
+      if (!booking) {
+        console.log('לא נמצאה הרשמה עבור משתמש זה בטיול זה');
+        return;
+      }
+
+      const bookingId = booking.id;
+      if(!bookingId) return;
+      this.bookingService.cancelBooking(bookingId).subscribe({
+        next: () => {
+          console.log('ההרשמה לטיול בוטלה בהצלחה!');
+          this.bookingDetails.set(null);
+          this.isRegistered.set(false);
+        },
+        error: (err) => {
+          console.error('הבקשה לביטול נכשלה:', err);
+        }
+      });
+    },
+    error: (err) => {
+      console.error('שגיאה בתקשורת מול השרת:', err);
+    }
+  });
+}
 
   ngOnInit() {
     this.tripsService.getTripById(this.tripID()).subscribe({
@@ -113,12 +114,12 @@ export class TripDetails implements OnInit {
         if (userId && tripId) {
           this.bookingService.getBookings().subscribe({
             next: (allBookings: Booking[]) => {
-              
-              const foundBooking = allBookings.find(b => 
-                String(b.userId).trim() === String(userId).trim() && 
+
+              const foundBooking = allBookings.find(b =>
+                String(b.userId).trim() === String(userId).trim() &&
                 String(b.tripId).trim() === String(tripId).trim()
               );
-              
+
               this.bookingDetails.set(foundBooking || null);
               this.isRegistered.set(!!foundBooking);
             },

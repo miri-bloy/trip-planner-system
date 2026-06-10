@@ -190,22 +190,22 @@
       "people": 2
     },
     {
-      "id": "7",
-      "tripId": "1",
-      "userId": "1",
-      "people": 3
-    },
-    {
-      "id": "7",
-      "tripId": "1",
-      "userId": "2",
-      "people": 3
-    },
-    {
       "tripId": "2",
       "userId": "2",
       "people": 1,
       "id": "QokssC3P6Jk"
+    },
+    {
+      "tripId": "3",
+      "userId": "2",
+      "people": 2,
+      "id": "Q77fN9NMH5A"
+    },
+    {
+      "tripId": "1",
+      "userId": "2",
+      "people": 10,
+      "id": "D7vKdHARSr8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
