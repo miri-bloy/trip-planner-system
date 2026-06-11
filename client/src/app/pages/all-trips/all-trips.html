@@ -9,7 +9,7 @@
 
   @if (authService.currentUser()?.isAdmin) {
     <button [routerLink]="['/add-trip']">
-      הוספת טיול
+      Add trip
     </button>
   }
 
@@ -17,7 +17,7 @@
     <div class="trip-card-wrapper">
       
       @if (isUserRegisteredToTrip(trip.id)) {
-        <p class="registered-badge">✓ את/ה רשום/ה לטיול זה!</p>
+        <p class="registered-badge">✓ You are registered for this trip!</p>
       }
       
       <app-trip-card [currentTrip]="trip"></app-trip-card>

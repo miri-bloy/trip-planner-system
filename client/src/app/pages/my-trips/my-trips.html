@@ -10,9 +10,8 @@
   @if (filteredMyTrips().length === 0) {
     <div class="no-trips-message">
       <div class="no-trips-icon">🎒</div>
-      <h3>לא נמצאו טיולים ברשימה שלך</h3>
-      <p>עדיין לא נרשמת לאף טיול, או שהסינונים הנוכחיים אינם תואמים לטיולים שלך.</p>
-    </div>
+      <h3>No trips found in your list</h3>
+      <p>You have not registered for any trips yet, or the current filters do not match your trips.</p>    </div>
   } @else {
     @for (trip of filteredMyTrips(); track trip.id) {
       <app-trip-card

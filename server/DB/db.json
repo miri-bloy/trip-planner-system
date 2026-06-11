@@ -200,6 +200,12 @@
       "userId": "2",
       "people": 10,
       "id": "D7vKdHARSr8"
+    },
+    {
+      "tripId": "5",
+      "userId": "2",
+      "people": 1,
+      "id": "6ezPkU8HfIg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

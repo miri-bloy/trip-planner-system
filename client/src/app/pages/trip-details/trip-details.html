@@ -3,7 +3,7 @@
       <h2>Destination: {{ currentTrip()?.destination }}</h2>
       <h3>Description: {{ currentTrip()?.description }}</h3>
       <h3>Dates: Between {{ currentTrip()?.startDate }} and {{ currentTrip()?.endDate }}</h3>
-      <h3>Price: {{ currentTrip()?.price }} ש"ח</h3>
+      <h3>Price: {{ currentTrip()?.price }} $</h3>
       
       <img [src]="currentTrip()?.image" alt="trip-image" style="max-width: 400px; border-radius: 8px;">
     
@@ -11,31 +11,31 @@
     
       @if (authService.currentUser()) {
         @if (isRegistered()) {
-            <h2>פרטי ההזמנה שלך:</h2>
-            <p>כמות נרשמים: {{bookingDetails()?.people}}</p>
-            <p>סכום ששולם: {{ (bookingDetails()?.people ?? 0) * (currentTrip()?.price ?? 0) }} ש"ח</p>
+            <h2>Your Booking Details:</h2>
+            <p>Number of People: {{bookingDetails()?.people}}</p>
+            <p>Amount Paid: {{ (bookingDetails()?.people ?? 0) * (currentTrip()?.price ?? 0) }} $</p>
           <button (click)="cancelTripRegistration()">
-            בטל רישום לטיול
+            Cancel Trip Registration
           </button>
         } @else {
           <button (click)="registerToTrip(peopleInput.valueAsNumber)">
-            הירשם לטיול זה
+            Register for this Trip
           </button>
           
           <div>
-            <label for="people">כמות נרשמים בטיול: </label>
+            <label for="people">Number of People in the Trip: </label>
             <input #peopleInput 
                    type="number" 
                    name="people" 
                    min="1"
                    [ngModel]="newBooking().people"
                    (ngModelChange)="newBooking.set({ tripId: currentTrip()?.id ?? '', userId: authService.currentUser()?.id ?? '', people: $event })">
-            <p>סכום לתשלום: {{ (newBooking().people ?? 1) * (currentTrip()?.price ?? 0) }} ש"ח</p>
+            <p>Amount to Pay: {{ (newBooking().people ?? 1) * (currentTrip()?.price ?? 0) }} $</p>
 
           </div>
         }
       }
     } @else {
-      <p>טוען את פרטי הטיול...</p>
+      <p>Loading trip details...</p>
     }
     

@@ -1,63 +1,63 @@
 <div class="form-container">
   
-  <h2>{{ isEditMode ? 'עריכת טיול קיים' : 'הוספת טיול חדש' }}</h2>
+  <h2>{{ isEditMode ? 'Edit existing trip' : 'Add new trip' }}</h2>
 
   <form [formGroup]="tripForm" (ngSubmit)="onSubmit()">
     
     <div class="form-group">
-      <label for="name">שם הטיול:</label>
+      <label for="name">Trip name:</label>
       <input id="name" type="text" formControlName="name" />
       @if (tripForm.get('name')?.invalid && tripForm.get('name')?.touched) {
-        <small class="error-message">שם הטיול הוא שדה חובה</small>
+        <small class="error-message">Trip name is a required field</small>
       }
     </div>
 
     <div class="form-group">
-      <label for="destination">יעד הטיול:</label>
+      <label for="destination">Trip destination:</label>
       <input id="destination" type="text" formControlName="destination" />
       @if (tripForm.get('destination')?.invalid && tripForm.get('destination')?.touched) {
-        <small class="error-message">יעד הטיול הוא שדה חובה</small>
+        <small class="error-message">Trip destination is a required field</small>
       }
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label for="startDate">תאריך התחלה:</label>
+        <label for="startDate">Start date:</label>
         <input id="startDate" type="date" formControlName="startDate" />
         @if (tripForm.get('startDate')?.invalid && tripForm.get('startDate')?.touched) {
-          <small class="error-message">חובה לבחור תאריך התחלה</small>
+          <small class="error-message">Start date must be selected</small>
         }
       </div>
 
       <div class="form-group">
-        <label for="endDate">תאריך סיום:</label>
+        <label for="endDate">End date:</label>
         <input id="endDate" type="date" formControlName="endDate" />
         @if (tripForm.get('endDate')?.invalid && tripForm.get('endDate')?.touched) {
-          <small class="error-message">חובה לבחור תאריך סיום</small>
+          <small class="error-message">End date must be selected</small>
         }
       </div>
     </div>
 
     <div class="form-group">
-      <label for="price">מחיר ($):</label>
+      <label for="price">Price ($):</label>
       <input id="price" type="number" formControlName="price" />
       @if (tripForm.get('price')?.invalid && tripForm.get('price')?.touched) {
-        <small class="error-message">חובה להזין מחיר תקין (גבוה מ-0)</small>
+        <small class="error-message">Must enter a valid number (greater than 0)</small>
       }
     </div>
 
     <div class="form-group">
-      <label for="description">תיאור הטיול:</label>
+      <label for="description">Trip description:</label>
       <textarea id="description" formControlName="description" rows="3"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="image">קישור לתמונה:</label>
+      <label for="image">Image link:</label>
       <input id="image" type="text" formControlName="image" />
     </div>
 
     <button type="submit" [disabled]="tripForm.invalid" class="submit-btn">
-      {{ isEditMode ? 'שמור שינויים' : 'צור טיול חדש' }}
+      {{ isEditMode ? 'Save changes' : 'Create new trip' }}
     </button>
     
   </form>

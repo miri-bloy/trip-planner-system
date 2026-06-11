@@ -1,39 +1,39 @@
 <div class="register-container">
-  <h2>הרשמה לאתר</h2>
+  <h2>Register</h2>
 
   <form (ngSubmit)="registerForm.form.valid && onSubmit()" #registerForm="ngForm" novalidate>
     
     <div class="form-group">
-      <label>שם מלא:</label>
+      <label>Full Name:</label>
       <input type="text" [(ngModel)]="userModel.name" name="userName" #nameInput="ngModel" required>
       @if (nameInput.invalid && nameInput.touched) {
-        <small class="error-msg">שם מלא הוא שדה חובה.</small>
+        <small class="error-msg">Full Name is a required field.</small>
       }
     </div>
 
     <div class="form-group">
-      <label>אימייל:</label>
+      <label>Email Address:</label>
       <input type="email" [(ngModel)]="userModel.email" name="userEmail" #emailInput="ngModel" required email>
       @if (emailInput.invalid && emailInput.touched) {
-        @if (emailInput.errors?.['required']) { <small class="error-msg">כתובת אימייל היא שדה חובה.</small> }
-        @if (emailInput.errors?.['email']) { <small class="error-msg">נא להזין כתובת אימייל תקינה (כולל @ ונקודה).</small> }
+        @if (emailInput.errors?.['required']) { <small class="error-msg">Email Address is a required field.</small> }
+        @if (emailInput.errors?.['email']) { <small class="error-msg">Please enter a valid email address.</small> }
       }
     </div>
 
     <div class="form-group">
-      <label>סיסמה:</label>
+      <label>Password:</label>
       <input type="password" [(ngModel)]="userModel.password" name="userPassword" #passInput="ngModel" required minlength="6">
       @if (passInput.invalid && passInput.touched) {
-        @if (passInput.errors?.['required']) { <small class="error-msg">סיסמה היא שדה חובה.</small> }
-        @if (passInput.errors?.['minlength']) { <small class="error-msg">הסיסמה חייבת להכיל לפחות 6 תווים.</small> }
+        @if (passInput.errors?.['required']) { <small class="error-msg">Password is a required field.</small> }
+        @if (passInput.errors?.['minlength']) { <small class="error-msg">assword must be at least 6 characters long.</small> }
       }
     </div>
 
     <div class="form-group">
-      <label>אימות סיסמה:</label>
+      <label>Confirm Password:</label>
       <input type="password" [(ngModel)]="verifyPassword" name="verifyUserPassword" #verifyInput="ngModel" required>
       @if (verifyInput.touched && userModel.password !== verifyPassword) {
-        <small class="error-msg">אימות הסיסמה אינו תואם לסיסמה שהוזנה.</small>
+        <small class="error-msg">Password confirmation does not match.</small>
       }
     </div>
 
@@ -42,9 +42,9 @@
     }
 
     <button type="submit" [disabled]="loading() || registerForm.invalid || userModel.password !== verifyPassword">
-      @if (loading()) { טוען... } @else { הירשם }
+      @if (loading()) { Loading... } @else { Sign Up }
     </button>
   </form>
   
-  <p>נרשמת כבר למערכת? עבור ל <a routerLink="/login">דף התחברות</a></p>
+  <p>Already registered? Go to the <a routerLink="/login">login page</a></p>
 </div>

@@ -31,15 +31,13 @@ export class Login {
       next: (users) => {
         // משוב ממוקד 1: המייל לא קיים במערכת
         if (!users || users.length === 0) {
-          this.error.set('כתובת המייל שהזנת אינה רשומה במערכת. ודא שהקלדת נכון או עבור לדף הרשמה.');
-          this.loading.set(false);
+          this.error.set('The email address you entered is not registered in the system. Verify that you typed it correctly or go to the registration page.');          this.loading.set(false);
           return;
         }
   
         // משוב ממוקד 2: המייל קיים אך הסיסמה שגויה
         if (users[0].password !== this.userModel.password) {
-          this.error.set('הסיסמה שהזנת אינה נכונה עבור מייל זה. נסה שנית.');
-          this.loading.set(false);
+          this.error.set('The password you entered is incorrect for this email. Please try again.');          this.loading.set(false);
           return;
         }
 
@@ -49,10 +47,10 @@ export class Login {
         this.loading.set(false);     
         this.router.navigate(['/home']);
       },
+      // שגיאה
       error: (err) => {
         console.error(err);
-        this.error.set('שגיאה בתקשורת מול השרת. אנא נסה שוב מאוחר יותר.');
-        this.loading.set(false);
+        this.error.set('Error communicating with the server. Please try again later.');        this.loading.set(false);
       }
     });
   }

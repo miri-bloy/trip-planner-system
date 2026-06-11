@@ -1,13 +1,13 @@
 <header>
     <section>
-        <p>שלום ל: {{this.authService.currentUser()?.name}}</p>
-        <button (click)="onLogout()">יציאה</button>
+        <p>Hello, {{this.authService.currentUser()?.name}}</p>
+        <button (click)="onLogout()">Log out</button>
     </section>
     <section>
-        <button routerLink="all-trips">רשימת הטיולים</button>
+        <button routerLink="all-trips">Trip list</button>
     </section>
     <section>
-        <button routerLink="my-trips">הטיולים שלי</button>
+        <button routerLink="my-trips">My trips</button>
     </section>
 </header>
 <router-outlet></router-outlet>

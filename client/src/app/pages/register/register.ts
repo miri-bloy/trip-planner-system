@@ -57,15 +57,13 @@ export class Register {
           },
           error: (err) => {
             console.error(err);
-            this.error.set('תהליך ההרשמה נכשל בשרת. נסה שנית מאוחר יותר.');
-            this.loading.set(false);
+            this.error.set('The registration process failed on the server. Please try again later.');            this.loading.set(false);
           }
         });
       },
       error: (err) => {
         console.error(err);
-        this.error.set('שגיאה בתקשורת מול השרת. אנא בדוק את החיבור לרשת.');
-        this.loading.set(false);
+        this.error.set('Communication error with the server. Please check your network connection.');        this.loading.set(false);
       }
     });
   }
