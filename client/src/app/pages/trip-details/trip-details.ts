@@ -74,13 +74,10 @@ export class TripDetails implements OnInit {
     return;
   }
 
-  this.bookingService.getBookings().subscribe({
-    next: (allBookings: Booking[]) => {
-      const booking = allBookings.find(b => 
-        String(b.userId) === String(userId) && 
-        String(b.tripId) === String(tripId)
-      );
-
+  this.bookingService.getBookingsByUserIdAndTripId(String(userId), String(tripId)).subscribe({
+      next: (relevantBookings: Booking[]) => {
+      const booking = relevantBookings[0];
+  
       if (!booking) {
         console.log('לא נמצאה הרשמה עבור משתמש זה בטיול זה');
         return;
@@ -105,31 +102,27 @@ export class TripDetails implements OnInit {
   });
 }
 
-  ngOnInit() {
-    this.tripsService.getTripById(this.tripID()).subscribe({
-      next: (data) => {
-        this.currentTrip.set(data);
+ngOnInit() {
+  this.tripsService.getTripById(this.tripID()).subscribe({
+    next: (data) => {
+      this.currentTrip.set(data);
 
-        const userId = this.authService.currentUser()?.id;
-        const tripId = this.tripID();
+      const userId = this.authService.currentUser()?.id;
+      const tripId = this.tripID();
 
-        if (userId && tripId) {
-          this.bookingService.getBookings().subscribe({
-            next: (allBookings: Booking[]) => {
+      if (userId && tripId) {
+        this.bookingService.getBookingsByUserIdAndTripId(String(userId), String(tripId)).subscribe({
+          next: (relevantBookings: Booking[]) => {
+            const foundBooking = relevantBookings[0] || null;
 
-              const foundBooking = allBookings.find(b =>
-                String(b.userId).trim() === String(userId).trim() &&
-                String(b.tripId).trim() === String(tripId).trim()
-              );
-
-              this.bookingDetails.set(foundBooking || null);
-              this.isRegistered.set(!!foundBooking);
-            },
-            error: (err) => console.error('שגיאה בשליפת כל ההזמנות:', err)
-          });
-        }
-      },
-      error: (err) => console.error('שגיאה בטעינת הטיול:', err)
-    });
-  }
+            this.bookingDetails.set(foundBooking);
+            this.isRegistered.set(!!foundBooking);
+          },
+          error: (err) => console.error('שגיאה בשליפת ההזמנה הרלוונטית:', err)
+        });
+      }
+    },
+    error: (err) => console.error('שגיאה בטעינת הטיול:', err)
+  });
+}
 }

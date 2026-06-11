@@ -32,8 +32,7 @@ export class AllTrips {
     effect(() => {
       const user = this.authService.currentUser();
       if (user && user.id) {
-        this.bookingService.getBookings().subscribe(allBookings => {
-          const filteredBookings = allBookings.filter(booking => String(booking.userId) === String(user.id));
+        this.bookingService.getBookingsByUserId(String(user.id)).subscribe(filteredBookings => {
           this.myBookings.set(filteredBookings);
         });
       } else {

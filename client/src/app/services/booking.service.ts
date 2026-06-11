@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Booking } from '../modules/booking.module';
 
 @Injectable({
@@ -29,20 +29,31 @@ export class BookingService {
     return this.http.delete<void>(`${this.apiUrl}/${bookingId}`);
   }
 
-  //פונקציות אלו לא עובדות בפועל:
-  //  לאחר סדיקה התברר שיש בעיה בתרגום של ה QUARY (המרה בין מחרוזת למספר)
-  //   //קבלת כל ההזמנות ע"פ מזהה משתמש
-  //   getBookingsByUserId(userId: string | undefined): Observable<Booking[]> {
-  //     return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}`);
-  //   }
-  //   //קבלת כל ההזמנות ע"פ מזהה טיול
-  //   getBookingsByTripId(tripId: string | undefined): Observable<Booking[]> {
-  //   return this.http.get<Booking[]>(`${this.apiUrl}?tripId=${tripId}`);
-  //   }
+// ביצוע סינון מקומי באמצעות map כדי לעקוף בעיות בפרמטרי שאילתה בשרת (אי-התאמת טיפוסים)
+// שליפת כל ההזמנות וסינון לפי מזהים ע"י המרה למחרוזת וניקוי רווחים להבטחת התאמה מדויקת
 
-  //  //קבלת כל ההזמנות ע"פ מזהה טיול ומזהה משתמש
-  //  getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string): Observable<Booking[]> {
-  //     return this.http.get<Booking[]>(`${this.apiUrl}?userId=${userId}&tripId=${tripId}`);
-  //  }
+//קבלת כל ההזמנות ע"פ מזהה משתמש
+  getBookingsByUserId(userId: string | undefined): Observable<Booking[]> {
+    return this.getBookings().pipe(
+      map(bookings => bookings.filter(b => String(b.userId).trim() === userId))
+    );
+  }
+
+  // קבלת כל ההזמנות ע"פ מזהה טיול
+  getBookingsByTripId(tripId: string | undefined): Observable<Booking[]> {
+    return this.getBookings().pipe(
+      map(bookings => bookings.filter(b => String(b.tripId).trim() === tripId))
+    );
+  }
+
+  //קבלת כל ההזמנות ע"פ מזהה טיול ומזהה משתמש
+  getBookingsByUserIdAndTripId(userId: string | undefined, tripId: string | undefined): Observable<Booking[]> {
+    return this.getBookings().pipe(
+      map(bookings => bookings.filter(b => 
+        String(b.userId).trim() === userId && 
+        String(b.tripId).trim() === tripId
+      ))
+    );
+  }
 
 }

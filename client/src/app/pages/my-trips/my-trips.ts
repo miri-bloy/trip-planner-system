@@ -40,16 +40,13 @@ export class MyTrips implements OnInit {
   });
 
   constructor() {
-   
     effect(() => {
       const user = this.authService.currentUser();
-
+  
       if (user && user.id) {
-        console.log('מזהה משתמש עודכן, מביא את כל ההזמנות מהשרת עבור סינון ידני:', user.id);
-
-        this.bookingService.getBookings().subscribe(allBookings => {
-          console.log('כל ההזמנות הגולמיות שהגיעו מהשרת:', allBookings);
-          const filteredBookings = allBookings.filter(booking => String(booking.userId) === String(user.id));
+        console.log('מזהה משתמש עודכן, מביא הזמנות מסוננות מהשרת:', user.id);
+  
+        this.bookingService.getBookingsByUserId(String(user.id)).subscribe(filteredBookings => {
           console.log('ההזמנות המסוננות של המשתמש הנוכחי:', filteredBookings);
           this.myBookings.set(filteredBookings);
         });

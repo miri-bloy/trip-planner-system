@@ -28,16 +28,14 @@ export class TripCard {
 
     console.log('בודק נרשמים עבור טיול מספר:', currentTripId);
 
-    this.bookingService.getBookings().subscribe({
-      next: (allBookings) => {
-        const relevantBookings = allBookings.filter(b => String(b.tripId).trim() === currentTripId);
+    this.bookingService.getBookingsByTripId(currentTripId).subscribe({
+      next: (relevantBookings) => {
         console.log('ההזמנות הרלוונטיות שנמצאו לאחר סינון:', relevantBookings);
-
+    
         if (relevantBookings.length === 0) {
           this.router.navigate(['/edit-trip', this.currentTrip().id]);
         } else {
-          alert('לא ניתן לערוך טיול זה מכיוון שיש אליו כבר נרשמים!');
-        }
+          alert('This trip cannot be edited because there are already people registered for it!');        }
       },
       error: (err) => {
         console.error('שגיאה בקבלת ההזמנות:', err);
@@ -49,17 +47,13 @@ export class TripCard {
 
     console.log('בודק נרשמים לפני מחיקת טיול מספר:', currentTripId);
 
-    this.bookingService.getBookings().subscribe({
-      next: (allBookings) => {
-        const relevantBookings = allBookings.filter(
-          b => String(b.tripId).trim() === currentTripId
-        );
-
+    this.bookingService.getBookingsByTripId(currentTripId).subscribe({
+      next: (relevantBookings) => {
         if (relevantBookings.length === 0) {
           this.tripToDelete = this.currentTrip();
           this.showDeleteModal = true;
         } else {
-          alert('לא ניתן למחוק טיול זה מכיוון שיש אליו כבר נרשמים!');
+          alert('This trip cannot be deleted because there are already people registered for it!');
         }
       },
       error: (err) => {
